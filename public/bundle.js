@@ -102,9 +102,11 @@ __webpack_require__.r(__webpack_exports__);
 var Review = function Review(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "review-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Firstname"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, props.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: props.image
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
     className: "date"
-  }, "Time-ago review left"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "This is a blub of text the user has left to explain how they felt about their stay at this bnb."));
+  }, props.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, props.body));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Review);
@@ -186,11 +188,33 @@ function (_React$Component) {
     _classCallCheck(this, App);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
-    _this.state = {};
+    _this.state = {
+      reviews: []
+    };
     return _this;
   }
 
   _createClass(App, [{
+    key: "getReviews",
+    value: function getReviews() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/reviews').then(function (response) {
+        console.log('this is the response from getReviews: ', response);
+
+        _this2.setState({
+          reviews: response.data
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getReviews();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -199,7 +223,15 @@ function (_React$Component) {
         className: "review-top"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Reviews"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "2 Reviews")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "review-search"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Review_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Review_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Review_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReviewFooter_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+      })), this.state.reviews.map(function (review) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Review_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          key: review.id,
+          name: review.author,
+          image: review.image,
+          created_at: review.created_at,
+          body: review.body
+        });
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReviewFooter_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null));
     }
   }]);
 
