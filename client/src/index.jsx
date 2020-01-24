@@ -9,8 +9,25 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-
+      reviews: []
     };
+  }
+
+  getReviews() {
+    axios.get('/reviews')
+      .then((response) => {
+        console.log('this is the response from getReviews: ', response);
+        this.setState({
+          reviews: response.data
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  componentDidMount() {
+    this.getReviews();
   }
 
   render() {
@@ -23,9 +40,14 @@ class App extends React.Component {
           </div>
           <input className="review-search" />
         </div>
-        <Review />
-        <Review />
-        <Review />
+        {this.state.reviews.map(review => {
+          return <Review
+            key={review.id}
+            name={review.author}
+            image={review.image}
+            created_at={review.created_at}
+            body={review.body} />;
+        })}
         <ReviewFooter />
       </div>
     );
