@@ -1,6 +1,6 @@
-const path = require('path')
-const SRC_DIR = path.join(__dirname, 'client/src/index.js')
-const DIST_DIR = path.join(__dirname,'public')
+const path = require('path');
+const SRC_DIR = path.join(__dirname, 'client/src/index.jsx');
+const DIST_DIR = path.join(__dirname, 'public');
 
 module.exports = {
   "mode": "development",
