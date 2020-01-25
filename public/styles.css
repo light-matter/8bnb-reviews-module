@@ -12,11 +12,33 @@ body {
   border-bottom: solid 1px #efefef;
 }
 
+.review-container img {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.name {
+  margin-bottom: 5px;
+}
+
 .date{
-  color: grey;
+  margin-top: 5px;
+  font-weight: 100;
+  font-size: 13px;
 }
 .review-body {
   margin: 25px;
+}
+
+.name-date {
+  margin-left: 15px;
 }
 
 .review-search {

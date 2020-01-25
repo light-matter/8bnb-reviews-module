@@ -102,11 +102,17 @@ __webpack_require__.r(__webpack_exports__);
 var Review = function Review(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "review-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, props.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "review-header"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: props.image
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "name-date"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "name"
+  }, props.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "date"
-  }, props.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, props.body));
+  }, props.created_at))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, props.body));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Review);
