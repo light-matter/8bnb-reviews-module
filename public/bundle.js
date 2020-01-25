@@ -228,7 +228,8 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "review-top"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Reviews"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "2 Reviews")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "review-search"
+        className: "review-search",
+        placeholder: "Search reviews"
       })), this.state.reviews.map(function (review) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Review_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
           key: review.id,

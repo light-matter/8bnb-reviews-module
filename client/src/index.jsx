@@ -38,7 +38,7 @@ class App extends React.Component {
             <h2>Reviews</h2>
             <h2>2 Reviews</h2>
           </div>
-          <input className="review-search" />
+          <input className="review-search" placeholder="Search reviews" />
         </div>
         {this.state.reviews.map(review => {
           return <Review

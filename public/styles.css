@@ -8,8 +8,7 @@ body {
 }
 
 .review-container {
-  border-top: solid 1px #efefef;
-  border-bottom: solid 1px #efefef;
+  border-bottom: solid 1px #e0e0e0;
 }
 
 .review-container img {
@@ -51,6 +50,7 @@ body {
   font-weight: 600;
   padding-left: 7px;
   padding-right: 7px;
+  border: solid 1px #e0e0e0;
 }
 
 .review-top {

@@ -12,7 +12,7 @@ const Review = (props) => {
       </div>
       <p>{props.body}</p>
     </div>
-  )
-}
+  );
+};
 
 export default Review;
