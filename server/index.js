@@ -10,7 +10,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.get('/reviews', (req, res) => {
   db.getReviews((err, data) => {
     if (err) {
-      res.status(400).send()
+      res.status(400).send();
     } else {
       res.send(data);
     }
