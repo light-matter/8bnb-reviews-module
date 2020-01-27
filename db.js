@@ -1,5 +1,4 @@
 var mysql = require('mysql');
-
 var connection = mysql.createConnection({
   host: 'localhost',
   user: 'student',
@@ -26,6 +25,6 @@ module.exports = {
         callback(null, data);
       }
     });
-  },
-
+  }
 };
+
