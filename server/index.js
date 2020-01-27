@@ -8,9 +8,12 @@ const db = require('../db.js');
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/reviews', (req, res) => {
-  console.log('this is some text from the app.get call');
   db.getReviews((err, data) => {
-    res.send(data);
+    if (err) {
+      res.status(400).send()
+    } else {
+      res.send(data);
+    }
   });
 });
 
