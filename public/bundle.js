@@ -102,11 +102,25 @@ __webpack_require__.r(__webpack_exports__);
 var Review = function Review(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "review-container"
+<<<<<<< HEAD
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "review-header"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: props.image
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "name-date"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "name"
+  }, props.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "date"
+  }, props.created_at))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, props.body));
+=======
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, props.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: props.image
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
     className: "date"
   }, props.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, props.body));
+>>>>>>> master
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Review);
@@ -222,7 +236,12 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "review-top"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Reviews"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "2 Reviews")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+<<<<<<< HEAD
+        className: "review-search",
+        placeholder: "Search reviews"
+=======
         className: "review-search"
+>>>>>>> master
       })), this.state.reviews.map(function (review) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Review_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
           key: review.id,

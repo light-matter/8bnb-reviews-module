@@ -8,7 +8,7 @@ const Review = (props) => {
       <h5 className="date">{props.created_at}</h5>
       <p>{props.body}</p>
     </div>
-  )
-}
+  );
+};
 
 export default Review;

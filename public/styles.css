@@ -8,15 +8,36 @@ body {
 }
 
 .review-container {
-  border-top: solid 1px #efefef;
-  border-bottom: solid 1px #efefef;
+  border-bottom: solid 1px #e0e0e0;
+}
+
+.review-container img {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.name {
+  margin-bottom: 5px;
 }
 
 .date{
-  color: grey;
+  margin-top: 5px;
+  font-weight: 100;
+  font-size: 13px;
 }
 .review-body {
   margin: 25px;
+}
+
+.name-date {
+  margin-left: 15px;
 }
 
 .review-search {
@@ -29,6 +50,7 @@ body {
   font-weight: 600;
   padding-left: 7px;
   padding-right: 7px;
+  border: solid 1px #e0e0e0;
 }
 
 .review-top {
