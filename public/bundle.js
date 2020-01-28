@@ -256,7 +256,7 @@ function (_React$Component) {
       searchInput: ''
     };
     _this.searchHandler = _this.searchHandler.bind(_assertThisInitialized(_this));
-    _this.searchHandler = _this.pageHandler.bind(_assertThisInitialized(_this));
+    _this.pageHandler = _this.pageHandler.bind(_assertThisInitialized(_this));
     _this.inputHandler = _this.inputHandler.bind(_assertThisInitialized(_this));
     return _this;
   } // paginate
@@ -269,7 +269,7 @@ function (_React$Component) {
       var page = [];
 
       for (var i = 0; i < reviews.length; i += 7) {
-        for (var j = 0; j < 7; j++) {
+        for (var j = 0; j < this.state.reviewsPerPage; j++) {
           page.push(reviews[j + i]);
         }
 
@@ -278,6 +278,7 @@ function (_React$Component) {
       }
 
       this.setState({
+        reviews: reviews,
         paginatedReviews: result
       });
     }
@@ -315,7 +316,6 @@ function (_React$Component) {
     key: "inputHandler",
     value: function inputHandler(e) {
       this.setState(_defineProperty({}, e.target.name, e.target.value));
-      console.log(this.state.searchInput);
     }
   }, {
     key: "pageHandler",
@@ -323,7 +323,7 @@ function (_React$Component) {
       e.preventDefault();
       this.setState({
         currentPage: e.target.innerText
-      }, console.log(this.state.currentPage));
+      });
     }
   }, {
     key: "componentDidMount",
@@ -342,9 +342,7 @@ function (_React$Component) {
         className: "reviews"
       }, "Reviews"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "review-num"
-      }, this.state.reviews.length, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "reviews"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        action: "#"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, this.state.reviews.length, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "reviews"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: "review-search",
         placeholder: "Search reviews..",
@@ -355,7 +353,7 @@ function (_React$Component) {
         onClick: this.searchHandler,
         type: "submit",
         className: "search-btn"
-      }, "\uD83D\uDD0D")), currReviews.map(function (review) {
+      }, "\uD83D\uDD0D"), currReviews.map(function (review) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Review_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
           key: review.id,
           name: review.author,

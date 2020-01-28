@@ -18,7 +18,7 @@ class App extends React.Component {
       searchInput: ''
     };
     this.searchHandler = this.searchHandler.bind(this);
-    this.searchHandler = this.pageHandler.bind(this);
+    this.pageHandler = this.pageHandler.bind(this);
     this.inputHandler = this.inputHandler.bind(this);
   }
 
@@ -27,13 +27,14 @@ class App extends React.Component {
     let result = [];
     let page = [];
     for (let i = 0; i < reviews.length; i += 7) {
-      for (let j = 0; j < 7; j++) {
+      for (let j = 0; j < this.state.reviewsPerPage; j++) {
         page.push(reviews[j + i]);
       }
       result.push(page);
       page = [];
     }
     this.setState({
+      reviews: reviews,
       paginatedReviews: result
     });
   }
@@ -67,14 +68,13 @@ class App extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     });
-    console.log(this.state.searchInput)
   }
 
   pageHandler(e) {
     e.preventDefault();
     this.setState({
       currentPage: e.target.innerText
-    }, console.log(this.state.currentPage));
+    });
   }
 
   componentDidMount() {
@@ -93,21 +93,21 @@ class App extends React.Component {
             <h4 className="review-num">{this.state.reviews.length} </h4><span >reviews</span>
           </div>
         </div>
-        <form action="#">
-          <input
-            type="text"
-            className="review-search"
-            placeholder="Search reviews.."
-            name="searchInput"
-            onChange={this.inputHandler}
-            value={this.state.searchInput}
-          />
-          <button
-            onClick={this.searchHandler}
-            type="submit"
-            className="search-btn">&#x1F50D;
-          </button>
-        </form>
+
+        <input
+          type="text"
+          className="review-search"
+          placeholder="Search reviews.."
+          name="searchInput"
+          onChange={this.inputHandler}
+          value={this.state.searchInput}
+        />
+        <button
+          onClick={this.searchHandler}
+          type="submit"
+          className="search-btn">&#x1F50D;
+        </button>
+
         {currReviews.map(review => {
           return <Review
             key={review.id}

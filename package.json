@@ -12,7 +12,8 @@
     "start-dev": "webpack-dev-server --open",
     "build": "webpack --watch",
     "seed": "node seed.js",
-    "test": "jest"
+    "test": "jest",
+    "migrate": "mysql -u student -p < schema.sql"
   },
   "dependencies": {
     "axios": "^0.19.2",
