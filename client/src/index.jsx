@@ -9,14 +9,34 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      reviews: []
+      reviews: [],
+      paginatedReviews: [],
+      currentPage: 0,
+      postsPerPage: 7
     };
+  }
+
+  // paginate
+  paginate(reviews) {
+    let result = [];
+    let page = [];
+    for (let i = 0; i < reviews.length; i += 7) {
+      for (let i = 0; i < 7; i++) {
+        page.push(reviews[i]);
+      }
+      result.push(page);
+      page = [];
+    }
+    this.setState({
+      paginatedReviews: result
+    });
   }
 
   getReviews() {
     axios.get('/reviews')
       .then((response) => {
-        console.log('this is the response from getReviews: ', response);
+        this.paginate(response.data);
+        console.log('from getReviews: ', response.data.length)
         this.setState({
           reviews: response.data
         });
@@ -31,16 +51,18 @@ class App extends React.Component {
   }
 
   render() {
+    let currReviews = this.state.paginatedReviews[this.state.currentPage] || [];
+
     return (
       <div className="review-body">
         <div className="review-top">
           <div>
-            <h2>Reviews</h2>
-            <h2>2 Reviews</h2>
+            <h4 className="reviews">Reviews</h4>
+            <h4 className="review-num">{this.state.reviews.length} </h4><span >reviews</span>
           </div>
-          <input className="review-search" placeholder="Search reviews" />
         </div>
-        {this.state.reviews.map(review => {
+        <input className="review-search" placeholder="Search reviews" />
+        {currReviews.map(review => {
           return <Review
             key={review.id}
             name={review.author}

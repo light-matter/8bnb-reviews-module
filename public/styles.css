@@ -7,8 +7,17 @@ body {
   width: 700px;
 }
 
+.reviews {
+  font-size: 24px;
+}
+
 .review-container {
   border-bottom: solid 1px #e0e0e0;
+  padding-bottom: 12px;
+}
+
+.review-num {
+  display: inline;
 }
 
 .review-container img {
@@ -18,22 +27,31 @@ body {
 }
 
 .review-header {
+  margin-top: 28px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
 .name {
-  margin-bottom: 5px;
+  margin: 2px 0 6px 0;
+  font-weight: 400;
 }
 
-.date{
-  margin-top: 5px;
+.date {
+  margin: 0 0 2px 0;
   font-weight: 100;
   font-size: 13px;
 }
+
+.name-date {
+  display: flex;
+  flex-direction: column;
+}
+
 .review-body {
   margin: 25px;
+  font-weight: 300;
 }
 
 .name-date {
@@ -45,18 +63,18 @@ body {
   font-size: 14px;
   letter-spacing: normal;
   color: #484848;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  font-weight: 600;
-  padding-left: 7px;
-  padding-right: 7px;
+  padding: 8px 7px;
+  font-weight: 400;
   border: solid 1px #e0e0e0;
+  display: block;
+  width: 310px;
 }
 
 .review-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 18px;
 }
 
 .review-footer-button {

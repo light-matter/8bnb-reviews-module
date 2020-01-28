@@ -102,7 +102,6 @@ __webpack_require__.r(__webpack_exports__);
 var Review = function Review(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "review-container"
-<<<<<<< HEAD
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "review-header"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -114,13 +113,6 @@ var Review = function Review(props) {
   }, props.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "date"
   }, props.created_at))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, props.body));
-=======
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, props.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: props.image
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "date"
-  }, props.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, props.body));
->>>>>>> master
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Review);
@@ -203,18 +195,43 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
     _this.state = {
-      reviews: []
+      reviews: [],
+      paginatedReviews: [],
+      currentPage: 0,
+      postsPerPage: 7
     };
     return _this;
-  }
+  } // paginate
+
 
   _createClass(App, [{
+    key: "paginate",
+    value: function paginate(reviews) {
+      var result = [];
+      var page = [];
+
+      for (var i = 0; i < reviews.length; i += 7) {
+        for (var _i = 0; _i < 7; _i++) {
+          page.push(reviews[_i]);
+        }
+
+        result.push(page);
+        page = [];
+      }
+
+      this.setState({
+        paginatedReviews: result
+      });
+    }
+  }, {
     key: "getReviews",
     value: function getReviews() {
       var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/reviews').then(function (response) {
-        console.log('this is the response from getReviews: ', response);
+        _this2.paginate(response.data);
+
+        console.log('from getReviews: ', response.data.length);
 
         _this2.setState({
           reviews: response.data
@@ -231,18 +248,19 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var currReviews = this.state.paginatedReviews[this.state.currentPage] || [];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "review-body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "review-top"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Reviews"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "2 Reviews")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-<<<<<<< HEAD
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "reviews"
+      }, "Reviews"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "review-num"
+      }, this.state.reviews.length, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "reviews"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "review-search",
         placeholder: "Search reviews"
-=======
-        className: "review-search"
->>>>>>> master
-      })), this.state.reviews.map(function (review) {
+      }), currReviews.map(function (review) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Review_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
           key: review.id,
           name: review.author,
