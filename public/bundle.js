@@ -86,6 +86,51 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./client/src/Pagination.jsx":
+/*!***********************************!*\
+  !*** ./client/src/Pagination.jsx ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Pagination = function Pagination(props) {
+  var pageNumbers = [];
+
+  for (var i = 1; i <= Math.ceil(props.reviews.length / props.reviewsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "pagination"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "review-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#"
+  }, " < ")), pageNumbers.map(function (number) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: number,
+      className: "review-item",
+      onClick: props.pageHandler
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#"
+    }, number));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "review-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#"
+  }, " > ")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Pagination);
+
+/***/ }),
+
 /***/ "./client/src/Review.jsx":
 /*!*******************************!*\
   !*** ./client/src/Review.jsx ***!
@@ -130,10 +175,16 @@ var Review = function Review(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Pagination_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Pagination.jsx */ "./client/src/Pagination.jsx");
+
 
 
 var ReviewFooter = function ReviewFooter(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "This host has 23 reviews for other properties."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Pagination_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    reviews: props.reviews,
+    reviewsPerPage: props.reviewsPerPage,
+    pageHandler: props.pageHandler
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "This host has 23 reviews for other properties."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "review-footer-button"
   }, "View Other Reviews"));
 };
@@ -161,6 +212,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ReviewFooter_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ReviewFooter.jsx */ "./client/src/ReviewFooter.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -169,9 +222,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -198,8 +251,13 @@ function (_React$Component) {
       reviews: [],
       paginatedReviews: [],
       currentPage: 0,
-      postsPerPage: 7
+      reviewsPerPage: 7,
+      searchResults: [],
+      searchInput: ''
     };
+    _this.searchHandler = _this.searchHandler.bind(_assertThisInitialized(_this));
+    _this.searchHandler = _this.pageHandler.bind(_assertThisInitialized(_this));
+    _this.inputHandler = _this.inputHandler.bind(_assertThisInitialized(_this));
     return _this;
   } // paginate
 
@@ -211,8 +269,8 @@ function (_React$Component) {
       var page = [];
 
       for (var i = 0; i < reviews.length; i += 7) {
-        for (var _i = 0; _i < 7; _i++) {
-          page.push(reviews[_i]);
+        for (var j = 0; j < 7; j++) {
+          page.push(reviews[j + i]);
         }
 
         result.push(page);
@@ -231,14 +289,41 @@ function (_React$Component) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/reviews').then(function (response) {
         _this2.paginate(response.data);
 
-        console.log('from getReviews: ', response.data.length);
-
         _this2.setState({
           reviews: response.data
         });
       })["catch"](function (err) {
         console.log(err);
       });
+    }
+  }, {
+    key: "searchHandler",
+    value: function searchHandler(e) {
+      e.preventDefault();
+      var searchArr = this.state.reviews.slice();
+      var tempArr = [];
+
+      for (var i = 0; i < searchArr.length; i++) {
+        if (searchArr[i].body.includes(this.state.searchInput)) {
+          tempArr.push(searchArr[i]);
+        }
+      }
+
+      this.paginate(tempArr);
+    }
+  }, {
+    key: "inputHandler",
+    value: function inputHandler(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
+      console.log(this.state.searchInput);
+    }
+  }, {
+    key: "pageHandler",
+    value: function pageHandler(e) {
+      e.preventDefault();
+      this.setState({
+        currentPage: e.target.innerText
+      }, console.log(this.state.currentPage));
     }
   }, {
     key: "componentDidMount",
@@ -257,10 +342,20 @@ function (_React$Component) {
         className: "reviews"
       }, "Reviews"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "review-num"
-      }, this.state.reviews.length, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "reviews"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, this.state.reviews.length, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "reviews"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        action: "#"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
         className: "review-search",
-        placeholder: "Search reviews"
-      }), currReviews.map(function (review) {
+        placeholder: "Search reviews..",
+        name: "searchInput",
+        onChange: this.inputHandler,
+        value: this.state.searchInput
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.searchHandler,
+        type: "submit",
+        className: "search-btn"
+      }, "\uD83D\uDD0D")), currReviews.map(function (review) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Review_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
           key: review.id,
           name: review.author,
@@ -268,7 +363,11 @@ function (_React$Component) {
           created_at: review.created_at,
           body: review.body
         });
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReviewFooter_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReviewFooter_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        reviews: this.state.reviews,
+        reviewsPerPage: this.state.reviewsPerPage,
+        pageHandler: this.pageHandler
+      }));
     }
   }]);
 

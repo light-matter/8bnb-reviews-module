@@ -87,3 +87,23 @@ body {
   background: transparent !important;
   border-color: rgb(72, 72, 72)
 }
+
+.pagination {
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+}
+
+.review-item, .review-item a {
+  text-decoration: none;
+  color: rgb(0, 132, 137)
+}
+
+.search-btn {
+  position: relative;
+  top: -32px;
+  right: -293px;
+  border-radius: 5px;
+  height: 30px;
+  border-color: transparent;
+}

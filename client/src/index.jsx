@@ -4,6 +4,7 @@ import axios from 'axios';
 import Review from './Review.jsx';
 import ReviewFooter from './ReviewFooter.jsx';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -12,8 +13,13 @@ class App extends React.Component {
       reviews: [],
       paginatedReviews: [],
       currentPage: 0,
-      postsPerPage: 7
+      reviewsPerPage: 7,
+      searchResults: [],
+      searchInput: ''
     };
+    this.searchHandler = this.searchHandler.bind(this);
+    this.searchHandler = this.pageHandler.bind(this);
+    this.inputHandler = this.inputHandler.bind(this);
   }
 
   // paginate
@@ -21,8 +27,8 @@ class App extends React.Component {
     let result = [];
     let page = [];
     for (let i = 0; i < reviews.length; i += 7) {
-      for (let i = 0; i < 7; i++) {
-        page.push(reviews[i]);
+      for (let j = 0; j < 7; j++) {
+        page.push(reviews[j + i]);
       }
       result.push(page);
       page = [];
@@ -36,7 +42,6 @@ class App extends React.Component {
     axios.get('/reviews')
       .then((response) => {
         this.paginate(response.data);
-        console.log('from getReviews: ', response.data.length)
         this.setState({
           reviews: response.data
         });
@@ -46,11 +51,38 @@ class App extends React.Component {
       });
   }
 
+  searchHandler(e) {
+    e.preventDefault();
+    let searchArr = this.state.reviews.slice();
+    let tempArr = [];
+    for (let i = 0; i < searchArr.length; i++) {
+      if (searchArr[i].body.includes(this.state.searchInput)) {
+        tempArr.push(searchArr[i]);
+      }
+    }
+    this.paginate(tempArr);
+  }
+
+  inputHandler(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+    console.log(this.state.searchInput)
+  }
+
+  pageHandler(e) {
+    e.preventDefault();
+    this.setState({
+      currentPage: e.target.innerText
+    }, console.log(this.state.currentPage));
+  }
+
   componentDidMount() {
     this.getReviews();
   }
 
   render() {
+
     let currReviews = this.state.paginatedReviews[this.state.currentPage] || [];
 
     return (
@@ -61,7 +93,21 @@ class App extends React.Component {
             <h4 className="review-num">{this.state.reviews.length} </h4><span >reviews</span>
           </div>
         </div>
-        <input className="review-search" placeholder="Search reviews" />
+        <form action="#">
+          <input
+            type="text"
+            className="review-search"
+            placeholder="Search reviews.."
+            name="searchInput"
+            onChange={this.inputHandler}
+            value={this.state.searchInput}
+          />
+          <button
+            onClick={this.searchHandler}
+            type="submit"
+            className="search-btn">&#x1F50D;
+          </button>
+        </form>
         {currReviews.map(review => {
           return <Review
             key={review.id}
@@ -70,7 +116,11 @@ class App extends React.Component {
             created_at={review.created_at}
             body={review.body} />;
         })}
-        <ReviewFooter />
+        <ReviewFooter
+          reviews={this.state.reviews}
+          reviewsPerPage={this.state.reviewsPerPage}
+          pageHandler={this.pageHandler}
+        />
       </div>
     );
   }
