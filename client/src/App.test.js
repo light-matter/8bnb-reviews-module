@@ -8,26 +8,31 @@ import App from './App.jsx';
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
 // the describe function is the test suite
-describe('checks if App is rendering properly', function() {
+describe('checks to see if App is rendering properly', function() {
+
   it('renders app component without crashing', function() {
     const wrapper = shallow(<App />);
     // console.log(wrapper.debug());
   });
+
   it('renders body of review', function() {
     const wrapper = shallow(<App />);
     const appComponent = wrapper.find('.review-body');
     expect(appComponent.length).toStrictEqual(1);
   });
+
   it('renders search input', function() {
     const wrapper = shallow(<App />);
     const appComponent = wrapper.find('input');
     expect(appComponent.length).toStrictEqual(1);
   });
-  it('renders search submit btn', function() {
+
+  it('renders search input', function() {
     const wrapper = shallow(<App />);
-    const appComponent = wrapper.find('button');
+    const appComponent = wrapper.find('input');
     expect(appComponent.length).toStrictEqual(1);
   });
+
   it('renders search input', function() {
     const wrapper = shallow(<App />);
     const appComponent = wrapper.find('ReviewFooter');

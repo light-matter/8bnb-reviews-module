@@ -183,8 +183,7 @@ function (_React$Component) {
         _this2.setState({
           reviews: response.data
         });
-      })["catch"](function (err) {
-        console.log(err);
+      })["catch"](function (err) {// console.log(err);
       });
     }
   }, {
@@ -337,7 +336,9 @@ var Review = function Review(props) {
     className: "name"
   }, props.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "date"
-  }, props.created_at))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, props.body));
+  }, props.created_at))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "review-body"
+  }, props.body));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Review);

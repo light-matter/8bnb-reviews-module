@@ -10,7 +10,7 @@ const Review = (props) => {
           <p className="date">{props.created_at}</p>
         </div>
       </div>
-      <p>{props.body}</p>
+      <p className="review-body">{props.body}</p>
     </div>
   );
 };
