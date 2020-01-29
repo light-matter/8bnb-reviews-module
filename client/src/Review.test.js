@@ -40,4 +40,6 @@ describe('checks if reviews are rendering properly', function() {
     const date = wrapper.find('.date').text();
     expect(date).toEqual('2020-01-01');
   });
+
+
 });

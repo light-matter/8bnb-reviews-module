@@ -1,12 +1,13 @@
 import React from 'react';
 import Enzyme, { shallow, mount, render } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
+import requestAnimationFrame from './tempPolyfills.js';
 
 import Pagination from './Pagination.jsx';
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
-const reviews = [
+const testData = [
   {id: 1, author: 'Erin Sipes', image: 'https://s3.amazonaws.com/uifaces/faces/twitter/grahamkennery/128.jpg', body: 'Rem enim quam consectetur laborum nostrum veritatis impedit quisquam.', host_id: 1},
   {id: 2, author: 'Jermey Haag Sr.', image: 'https://s3.amazonaws.com/uifaces/faces/twitter/chris_witko/128.jpg', body: 'Voluptatem et officiis.', host_id: 1},
   {id: 3, author: 'Manuel Grimes', image: 'https://s3.amazonaws.com/uifaces/faces/twitter/mrjamesnoble/128.jpg', body: 'Quia recusandae sed molestiae.', host_id: 1},
@@ -24,18 +25,22 @@ const reviews = [
   {id: 15, author: 'Irving Erdman DVM', image: 'https://s3.amazonaws.com/uifaces/faces/twitter/kanickairaj/128.jpg', body: 'Quam inventore non omnis ducimus dolorem.', host_id: 1}
 ];
 
-describe('checks Pagination renders and functions', function() {
+const props = {
+  reviewsPerPage: 7,
+  reviews: testData
+};
+
+describe('Pagination', function() {
 
   test('check passing props', function() {
-    const wrapper = shallow(<Pagination reviews={reviews} />);
-    expect(reviews.length).toEqual(15);
+    let wrapper = shallow(<Pagination {...props} />);
+    expect(props.reviews.length).toEqual(15);
   });
 
-  test('checks correct number of reviews showing', function() {
-    const wrapper = mount(<Pagination reviews={reviews} />);
-    const reviewItem = wrapper.find('.review-item');
-    console.log(wrapper.debug({ verbose: true }));
-    expect(reviewItem.length).toEqual(7);
+  test('checks correct number of pagination page tabs showing', function() {
+    let wrapper = mount(<Pagination {...props} />);
+    let reviewItem = wrapper.find('.review-item');
+    expect(reviewItem.length).toEqual(3);
   });
 
 });
