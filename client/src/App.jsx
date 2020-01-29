@@ -44,10 +44,8 @@ class App extends React.Component {
       }
     }
     this.paginate(tempArr);
-    console.log(tempArr)
   }
 
-  // paginate
   paginate(reviews) {
     let result = [];
     let page = [];
@@ -66,7 +64,7 @@ class App extends React.Component {
 
   inputHandler(e) {
     this.setState({
-      [e.target.name]: e.target.value
+      searchInput: e.target.value
     });
   }
 

@@ -103,8 +103,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ReviewFooter_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ReviewFooter.jsx */ "./client/src/ReviewFooter.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -179,9 +177,7 @@ function (_React$Component) {
       }
 
       this.paginate(tempArr);
-      console.log(tempArr);
-    } // paginate
-
+    }
   }, {
     key: "paginate",
     value: function paginate(reviews) {
@@ -205,7 +201,9 @@ function (_React$Component) {
   }, {
     key: "inputHandler",
     value: function inputHandler(e) {
-      this.setState(_defineProperty({}, e.target.name, e.target.value));
+      this.setState({
+        searchInput: e.target.value
+      });
     }
   }, {
     key: "pageHandler",
