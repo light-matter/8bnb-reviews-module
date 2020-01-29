@@ -12,6 +12,13 @@
 ## Table of Contents
 
 1. [Usage](#Usage)
+To run app:
+// 1. npm install
+// 2. npm run migrate
+// 3. npm run seed
+// 4. npm start
+// 5. in another terminal npm run start-dev
+// navigate to localhost:3000
 1. [Requirements](#requirements)
 1. [Development](#development)
 

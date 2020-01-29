@@ -149,30 +149,9 @@ function (_React$Component) {
     _this.pageHandler = _this.pageHandler.bind(_assertThisInitialized(_this));
     _this.inputHandler = _this.inputHandler.bind(_assertThisInitialized(_this));
     return _this;
-  } // paginate
-
+  }
 
   _createClass(App, [{
-    key: "paginate",
-    value: function paginate(reviews) {
-      var result = [];
-      var page = [];
-
-      for (var i = 0; i < reviews.length; i += 7) {
-        for (var j = 0; j < this.state.reviewsPerPage; j++) {
-          page.push(reviews[j + i]);
-        }
-
-        result.push(page);
-        page = [];
-      }
-
-      this.setState({
-        reviews: reviews,
-        paginatedReviews: result
-      });
-    }
-  }, {
     key: "getReviews",
     value: function getReviews() {
       var _this2 = this;
@@ -200,6 +179,28 @@ function (_React$Component) {
       }
 
       this.paginate(tempArr);
+      console.log(tempArr);
+    } // paginate
+
+  }, {
+    key: "paginate",
+    value: function paginate(reviews) {
+      var result = [];
+      var page = [];
+
+      for (var i = 0; i < reviews.length; i += 7) {
+        for (var j = 0; j < this.state.reviewsPerPage; j++) {
+          page.push(reviews[j + i]);
+        }
+
+        result.push(page);
+        page = [];
+      }
+
+      this.setState({
+        reviews: reviews,
+        paginatedReviews: result
+      });
     }
   }, {
     key: "inputHandler",
@@ -245,6 +246,7 @@ function (_React$Component) {
       }, "\uD83D\uDD0D"), currReviews.map(function (review) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Review_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
           key: review.id,
+          id: review.id,
           name: review.author,
           image: review.image,
           created_at: review.created_at,
@@ -288,7 +290,7 @@ var Pagination = function Pagination(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "pagination"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "review-item"
+    className: "pagination-arrow"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#"
   }, " < ")), pageNumbers.map(function (number) {
@@ -300,7 +302,7 @@ var Pagination = function Pagination(props) {
       href: "#"
     }, number));
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "review-item"
+    className: "pagination-arrow"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#"
   }, " > ")));

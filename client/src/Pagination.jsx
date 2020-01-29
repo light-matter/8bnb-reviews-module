@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Pagination = (props) => {
-  
+
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(props.reviews.length / props.reviewsPerPage); i++) {
     pageNumbers.push(i);
@@ -9,11 +9,11 @@ const Pagination = (props) => {
 
   return (
     <ul className="pagination">
-      <li className="review-item"><a href="#"> &lt; </a></li>
+      <li className="pagination-arrow"><a href="#"> &lt; </a></li>
       {pageNumbers.map(number => {
         return <li key={number} className="review-item" onClick={props.pageHandler}><a href="#">{number}</a></li>;
       })}
-      <li className="review-item"><a href="#"> &gt; </a></li>
+      <li className="pagination-arrow"><a href="#"> &gt; </a></li>
     </ul>
   );
 };

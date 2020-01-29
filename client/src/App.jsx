@@ -21,23 +21,6 @@ class App extends React.Component {
     this.inputHandler = this.inputHandler.bind(this);
   }
 
-  // paginate
-  paginate(reviews) {
-    let result = [];
-    let page = [];
-    for (let i = 0; i < reviews.length; i += 7) {
-      for (let j = 0; j < this.state.reviewsPerPage; j++) {
-        page.push(reviews[j + i]);
-      }
-      result.push(page);
-      page = [];
-    }
-    this.setState({
-      reviews: reviews,
-      paginatedReviews: result
-    });
-  }
-
   getReviews() {
     axios.get('/reviews')
       .then((response) => {
@@ -61,6 +44,24 @@ class App extends React.Component {
       }
     }
     this.paginate(tempArr);
+    console.log(tempArr)
+  }
+
+  // paginate
+  paginate(reviews) {
+    let result = [];
+    let page = [];
+    for (let i = 0; i < reviews.length; i += 7) {
+      for (let j = 0; j < this.state.reviewsPerPage; j++) {
+        page.push(reviews[j + i]);
+      }
+      result.push(page);
+      page = [];
+    }
+    this.setState({
+      reviews: reviews,
+      paginatedReviews: result
+    });
   }
 
   inputHandler(e) {
@@ -110,6 +111,7 @@ class App extends React.Component {
         {currReviews.map(review => {
           return <Review
             key={review.id}
+            id={review.id}
             name={review.author}
             image={review.image}
             created_at={review.created_at}
