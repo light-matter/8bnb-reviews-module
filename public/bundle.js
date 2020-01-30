@@ -141,11 +141,13 @@ function (_React$Component) {
       currentPage: 0,
       reviewsPerPage: 7,
       searchResults: [],
-      searchInput: ''
+      searchInput: '',
+      searching: false
     };
     _this.searchHandler = _this.searchHandler.bind(_assertThisInitialized(_this));
     _this.pageHandler = _this.pageHandler.bind(_assertThisInitialized(_this));
     _this.inputHandler = _this.inputHandler.bind(_assertThisInitialized(_this));
+    _this.getReviews = _this.getReviews.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -158,6 +160,7 @@ function (_React$Component) {
         _this2.paginate(response.data);
 
         _this2.setState({
+          searching: false,
           reviews: response.data
         });
       })["catch"](function (err) {// console.log(err);
@@ -176,6 +179,9 @@ function (_React$Component) {
         }
       }
 
+      this.setState({
+        searching: true
+      });
       this.paginate(tempArr);
     }
   }, {
@@ -230,18 +236,26 @@ function (_React$Component) {
         className: "reviews"
       }, "Reviews"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "review-num"
-      }, this.state.reviews.length, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "reviews"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, this.state.reviews.length, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "reviews")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: "review-search",
         placeholder: "Search reviews..",
         name: "searchInput",
         onChange: this.inputHandler,
         value: this.state.searchInput
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "button-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "cancel-searchBtn",
+        style: {
+          display: this.state.searching ? 'block' : 'none'
+        },
+        onClick: this.getReviews
+      }, "X"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.searchHandler,
         type: "submit",
         className: "search-btn"
-      }, "\uD83D\uDD0D"), currReviews.map(function (review) {
+      }, "\uD83D\uDD0D"))), currReviews.map(function (review) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Review_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
           key: review.id,
           id: review.id,

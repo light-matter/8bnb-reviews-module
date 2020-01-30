@@ -14,11 +14,13 @@ class App extends React.Component {
       currentPage: 0,
       reviewsPerPage: 7,
       searchResults: [],
-      searchInput: ''
+      searchInput: '',
+      searching: false
     };
     this.searchHandler = this.searchHandler.bind(this);
     this.pageHandler = this.pageHandler.bind(this);
     this.inputHandler = this.inputHandler.bind(this);
+    this.getReviews = this.getReviews.bind(this);
   }
 
   getReviews() {
@@ -26,6 +28,7 @@ class App extends React.Component {
       .then((response) => {
         this.paginate(response.data);
         this.setState({
+          searching: false,
           reviews: response.data
         });
       })
@@ -43,6 +46,9 @@ class App extends React.Component {
         tempArr.push(searchArr[i]);
       }
     }
+    this.setState({
+      searching: true
+    });
     this.paginate(tempArr);
   }
 
@@ -90,21 +96,31 @@ class App extends React.Component {
             <h4 className="reviews">Reviews</h4>
             <h4 className="review-num">{this.state.reviews.length} </h4><span >reviews</span>
           </div>
-        </div>
 
-        <input
-          type="text"
-          className="review-search"
-          placeholder="Search reviews.."
-          name="searchInput"
-          onChange={this.inputHandler}
-          value={this.state.searchInput}
-        />
-        <button
-          onClick={this.searchHandler}
-          type="submit"
-          className="search-btn">&#x1F50D;
-        </button>
+
+          <input
+            type="text"
+            className="review-search"
+            placeholder="Search reviews.."
+            name="searchInput"
+            onChange={this.inputHandler}
+            value={this.state.searchInput}
+          />
+          <div className="button-container">
+            <button
+              className="cancel-searchBtn"
+              style={{display: this.state.searching ? 'block' : 'none' }}
+              onClick={this.getReviews}>
+                X
+            </button>
+            <button
+              onClick={this.searchHandler}
+              type="submit"
+              className="search-btn">
+                &#x1F50D;
+            </button>
+          </div>
+        </div>
 
         {currReviews.map(review => {
           return <Review

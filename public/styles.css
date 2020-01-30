@@ -68,13 +68,11 @@ body {
   border: solid 1px #e0e0e0;
   display: block;
   width: 310px;
+  margin: 22px 0 0 0;
 }
 
 .review-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 18px;
+  margin-bottom: -25px;
 }
 
 .review-footer-button {
@@ -99,10 +97,25 @@ body {
   color: rgb(0, 132, 137)
 }
 
+.button-container {
+  position: relative;
+  width: 65px;
+  display: flex;
+  justify-content: flex-end;
+  top: -33px;
+  right: -258px;
+}
+
+.cancel-searchBtn {
+  border: none;
+  padding: 7px;
+  color: lightslategrey;
+  font-weight: 100;
+  margin-right: 6px;
+}
+
 .search-btn {
   position: relative;
-  top: -32px;
-  right: -293px;
   border-radius: 5px;
   height: 30px;
   border-color: transparent;
