@@ -3,7 +3,7 @@ import Pagination from './Pagination.jsx';
 
 const ReviewFooter = (props) => {
   return (
-    <div>
+    <div className="review-footer">
       <Pagination
         reviews={props.reviews}
         reviewsPerPage={props.reviewsPerPage}

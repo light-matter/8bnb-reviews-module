@@ -361,7 +361,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ReviewFooter = function ReviewFooter(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Pagination_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "review-footer"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Pagination_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
     reviews: props.reviews,
     reviewsPerPage: props.reviewsPerPage,
     pageHandler: props.pageHandler

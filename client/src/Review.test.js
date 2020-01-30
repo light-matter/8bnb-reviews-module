@@ -1,8 +1,10 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, mount, render } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 
 import Review from './Review.jsx';
+import App from './App.jsx';
+import { testData } from './data/fixtures.js';
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
@@ -16,8 +18,22 @@ describe('checks if reviews are rendering properly', function() {
     createdAt: '2020-01-01'
   };
 
+  describe('paginated reviews', function() {
+    const wrapper = mount(<App />);
+    beforeEach(() => {
+      wrapper.setState({ reviews: testData });
+      // console.log(wrapper.state('reviews'))
+    });
+    test('state updates', function() {
+      expect(wrapper.state('reviews').length).toEqual(15);
+    });
+    test('only shows 7 reviews at a time', function() {
+      // console.log(wrapper.state('paginatedReviews'))
+    });
+  });
+
   test('renders authors name', function() {
-    const wrapper = Enzyme.mount(<Review name={review.author} />);
+    const wrapper = mount(<Review name={review.author} />);
     const author = wrapper.find('.name').text();
     expect(author).toEqual('Some Guy');
     // console.log('this is from inside the test!!!!!!', wrapper.debug());
