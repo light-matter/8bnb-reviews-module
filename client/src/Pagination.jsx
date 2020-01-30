@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles/Pagination.css';
 
 const Pagination = (props) => {
 
@@ -8,12 +9,12 @@ const Pagination = (props) => {
   }
 
   return (
-    <ul className="pagination">
-      <li className="pagination-arrow"><a href="#"> &lt; </a></li>
+    <ul className="Pagination">
+      <li className="PaginationArrow"><a href="#"> &lt; </a></li>
       {pageNumbers.map(number => {
-        return <li key={number} className="review-item" onClick={props.pageHandler}><a href="#">{number}</a></li>;
+        return <li key={number} className="ReviewItem" onClick={props.pageHandler}><a href="#">{number}</a></li>;
       })}
-      <li className="pagination-arrow"><a href="#"> &gt; </a></li>
+      <li className="PaginationArrow"><a href="#"> &gt; </a></li>
     </ul>
   );
 };

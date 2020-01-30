@@ -1,0 +1,57 @@
+body {
+  margin: 0 auto;
+  padding: 0;
+  font-size: 16px;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+  color: rgb(72, 72, 72);
+  width: 700px;
+}
+
+.Reviews {
+  font-size: 24px;
+}
+
+.ReviewNum {
+  display: inline;
+}
+
+.ReviewSearch {
+  border-radius: 5px;
+  font-size: 14px;
+  letter-spacing: normal;
+  color: #484848;
+  padding: 8px 7px;
+  font-weight: 400;
+  border: solid 1px #e0e0e0;
+  display: block;
+  width: 310px;
+  margin: 22px 0 0 0;
+}
+
+.ReviewTop {
+  margin-bottom: -25px;
+}
+
+.ButtonContainer {
+  position: relative;
+  width: 65px;
+  display: flex;
+  justify-content: flex-end;
+  top: -33px;
+  right: -258px;
+}
+
+.CancelSearchBtn {
+  border: none;
+  padding: 7px;
+  color: lightslategrey;
+  font-weight: 100;
+  margin-right: 6px;
+}
+
+.SearchBtn {
+  position: relative;
+  border-radius: 5px;
+  height: 30px;
+  border-color: transparent;
+}

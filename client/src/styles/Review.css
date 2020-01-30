@@ -1,0 +1,39 @@
+.ReviewContainer {
+  border-bottom: solid 1px #e0e0e0;
+  padding-bottom: 12px;
+}
+
+.ReviewContainer img {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+}
+
+.ReviewHeader {
+  margin-top: 28px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.Name {
+  margin: 2px 0 6px 0;
+  font-weight: 400;
+}
+
+.Date {
+  margin: 0 0 2px 0;
+  font-weight: 100;
+  font-size: 13px;
+}
+
+.NameDate {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+}
+
+.ReviewBody {
+  margin: 25px 0;
+  font-weight: 300;
+}

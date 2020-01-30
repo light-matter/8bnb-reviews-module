@@ -1,0 +1,14 @@
+.ReviewFooterButton {
+  color: rgb(72, 72, 72);
+  margin: 0px;
+  text-decoration: none;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  background: transparent;
+  border-color: rgb(72, 72, 72);
+}
+
+.ReviewFooter {
+  color: rgb(72, 72, 72)
+}

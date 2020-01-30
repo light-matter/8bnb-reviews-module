@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Review from './Review.jsx';
 import ReviewFooter from './ReviewFooter.jsx';
-
+import './styles/App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -90,33 +90,33 @@ class App extends React.Component {
     let currReviews = this.state.paginatedReviews[this.state.currentPage] || [];
 
     return (
-      <div className="review-body">
-        <div className="review-top">
+      <div className="ReviewBody">
+        <div className="ReviewTop">
           <div>
-            <h4 className="reviews">Reviews</h4>
-            <h4 className="review-num">{this.state.reviews.length} </h4><span >reviews</span>
+            <h4 className="Reviews">Reviews</h4>
+            <h4 className="ReviewNum">{this.state.reviews.length} </h4><span >reviews</span>
           </div>
 
 
           <input
             type="text"
-            className="review-search"
+            className="ReviewSearch"
             placeholder="Search reviews.."
             name="searchInput"
             onChange={this.inputHandler}
             value={this.state.searchInput}
           />
-          <div className="button-container">
+          <div className="ButtonContainer">
             <button
-              className="cancel-searchBtn"
+              className="CancelSearchBtn"
               style={{display: this.state.searching ? 'block' : 'none' }}
               onClick={this.getReviews}>
-                X
+                x
             </button>
             <button
               onClick={this.searchHandler}
               type="submit"
-              className="search-btn">
+              className="SearchBtn">
                 &#x1F50D;
             </button>
           </div>

@@ -2,9 +2,9 @@ import React from 'react';
 import Enzyme, { shallow, mount, render } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 
-import Review from './Review.jsx';
-import App from './App.jsx';
-import { testData } from './data/fixtures.js';
+import Review from '../Review.jsx';
+import App from '../App.jsx';
+import { testData } from '../data/fixtures.js';
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
@@ -20,6 +20,7 @@ describe('checks if reviews are rendering properly', function() {
 
   describe('paginated reviews', function() {
     const wrapper = mount(<App />);
+    console.log(wrapper.debug())
     beforeEach(() => {
       wrapper.setState({ reviews: testData });
       // console.log(wrapper.state('reviews'))
@@ -34,7 +35,7 @@ describe('checks if reviews are rendering properly', function() {
 
   test('renders authors name', function() {
     const wrapper = mount(<Review name={review.author} />);
-    const author = wrapper.find('.name').text();
+    const author = wrapper.find('.Name').text();
     expect(author).toEqual('Some Guy');
     // console.log('this is from inside the test!!!!!!', wrapper.debug());
   });
@@ -47,13 +48,13 @@ describe('checks if reviews are rendering properly', function() {
 
   test('renders text body of review', function() {
     const wrapper = shallow(<Review body={review.body} />);
-    const body = wrapper.find('.review-body').text();
+    const body = wrapper.find('.ReviewBody').text();
     expect(body).toEqual('A bunch of filler text.');
   });
 
   test('renders date the review was written', function() {
     const wrapper = shallow(<Review created_at={review.createdAt} />);
-    const date = wrapper.find('.date').text();
+    const date = wrapper.find('.Date').text();
     expect(date).toEqual('2020-01-01');
   });
 

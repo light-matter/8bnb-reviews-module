@@ -2,10 +2,10 @@ import React from 'react';
 import Enzyme, { shallow, render, mount } from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
 
-import ReviewFooter from './ReviewFooter.jsx';
-import Review from './Review.jsx';
-import App from './App.jsx';
-import { testData } from './data/fixtures.js';
+import ReviewFooter from '../ReviewFooter.jsx';
+import Review from '../Review.jsx';
+import App from '../App.jsx';
+import { testData } from '../data/fixtures.js';
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
@@ -19,7 +19,7 @@ describe('checks to see if App is rendering properly', function() {
 
   test('renders body of review', function() {
     const wrapper = shallow(<App />);
-    const appComponent = wrapper.find('.review-body');
+    const appComponent = wrapper.find('.ReviewBody');
     expect(appComponent.length).toStrictEqual(1);
   });
 

@@ -1,0 +1,10 @@
+.Pagination {
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+}
+
+.PaginationArrow, .PaginationArrow a, .ReviewItem, .ReviewItem a {
+  text-decoration: none;
+  color: rgb(0, 132, 137)
+}
