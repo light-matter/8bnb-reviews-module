@@ -21,7 +21,7 @@ describe('Pagination', function() {
   });
 
   test('checks correct number of pagination page tabs showing', function() {
-    let wrapper = mount(<Pagination {...props} />);
+    let wrapper = shallow(<Pagination {...props} />);
     console.log('tag', wrapper);
     let reviewItem = wrapper.find('.ReviewItem');
     expect(reviewItem.length).toEqual(3);

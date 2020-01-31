@@ -20,7 +20,7 @@ describe('checks if reviews are rendering properly', function() {
 
   describe('paginated reviews', function() {
     const wrapper = mount(<App />);
-    console.log(wrapper.debug())
+    console.log(wrapper.render().children());
     beforeEach(() => {
       wrapper.setState({ reviews: testData });
       // console.log(wrapper.state('reviews'))
