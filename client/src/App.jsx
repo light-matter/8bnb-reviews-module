@@ -29,6 +29,7 @@ class App extends React.Component {
     this.pageHandler = this.pageHandler.bind(this);
     this.inputHandler = this.inputHandler.bind(this);
     this.getReviews = this.getReviews.bind(this);
+    this.setRatings = this.setRatings.bind(this);
   }
 
   getReviews() {
@@ -39,6 +40,12 @@ class App extends React.Component {
           searching: false,
           reviews: response.data
         });
+      })
+      .then(() => {
+        this.setRatings();
+      })
+      .then(() => {
+        this.addGraph();
       })
       .catch((err) => {
         // console.log(err);
@@ -89,22 +96,46 @@ class App extends React.Component {
     });
   }
 
+  setRatings() {
+    const reviews = this.state.reviews;
+    const dataSet = [ 'clean_rating', 'accuracy_rating', 'communication_rating', 'location_rating', 'checkin_rating', 'value_rating' ];
+    const ratingState = [ 'CleanRating', 'AccuracyRating', 'CommunicationRating', 'LocationRating', 'CheckinRating', 'ValueRating' ];
+
+    dataSet.forEach((rating, index ) => {
+      let average = 0;
+      reviews.forEach(review => {
+        average += review[rating];
+      });
+      average = (average / rating.length) / 5;
+      average = average.toFixed(1);
+      this.setState({
+        [ ratingState[index] ]: average
+      }, console.log('average: ', this.state.AccuracyRating));
+    });
+  }
+
   addGraph() {
-    d3.selectAll('.Rating')
+    const graph = this.state;
+    const dataSet = [graph.CleanRating, graph.AccuracyRating, graph.CommunicationRating, graph.LocationRating, graph.CheckinRating, graph.ValueRating ];
+
+    d3.select('.GraphContainer').selectAll('.Rating')
+      .data(dataSet)
       .append('svg')
+      .style('background', 'lightgrey')
+      .style('margin-bottom', '2px')
       .attr('width', 100)
       .attr('height', 4)
       .attr('fill', '#008489')
       .append('rect')
-      .attr('width', 100)
+      .attr('width', (d) => d * 20)
       .attr('height', 4)
       .attr('x', 0)
       .attr('y', 0);
   }
 
+
   componentDidMount() {
     this.getReviews();
-    this.addGraph();
   }
 
   render() {
@@ -119,7 +150,14 @@ class App extends React.Component {
             <h4 className="ReviewNum">{this.state.reviews.length} </h4><span >reviews</span>
           </div>
 
-          <Graph />
+          <Graph
+            cleanRating={this.state.CleanRating}
+            accuracyRating={this.state.AccuracyRating}
+            communicationRating={this.state.CommunicationRating}
+            locationRating={this.state.LocationRating}
+            checkinRating={this.state.CheckinRating}
+            valueRating={this.state.ValueRating}
+          />
 
           <input
             type="text"

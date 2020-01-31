@@ -107,6 +107,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_styles_App_css__WEBPACK_IMPORTED_MODULE_6__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -161,6 +163,7 @@ function (_React$Component) {
     _this.pageHandler = _this.pageHandler.bind(_assertThisInitialized(_this));
     _this.inputHandler = _this.inputHandler.bind(_assertThisInitialized(_this));
     _this.getReviews = _this.getReviews.bind(_assertThisInitialized(_this));
+    _this.setRatings = _this.setRatings.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -176,6 +179,10 @@ function (_React$Component) {
           searching: false,
           reviews: response.data
         });
+      }).then(function () {
+        _this2.setRatings();
+      }).then(function () {
+        _this2.addGraph();
       })["catch"](function (err) {// console.log(err);
       });
     }
@@ -233,15 +240,37 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "setRatings",
+    value: function setRatings() {
+      var _this3 = this;
+
+      var reviews = this.state.reviews;
+      var dataSet = ['clean_rating', 'accuracy_rating', 'communication_rating', 'location_rating', 'checkin_rating', 'value_rating'];
+      var ratingState = ['CleanRating', 'AccuracyRating', 'CommunicationRating', 'LocationRating', 'CheckinRating', 'ValueRating'];
+      dataSet.forEach(function (rating, index) {
+        var average = 0;
+        reviews.forEach(function (review) {
+          average += review[rating];
+        });
+        average = average / rating.length / 5;
+        average = average.toFixed(1);
+
+        _this3.setState(_defineProperty({}, ratingState[index], average), console.log('average: ', _this3.state.AccuracyRating));
+      });
+    }
+  }, {
     key: "addGraph",
     value: function addGraph() {
-      d3__WEBPACK_IMPORTED_MODULE_5__["selectAll"]('.Rating').append('svg').attr('width', 100).attr('height', 4).attr('fill', '#008489').append('rect').attr('width', 100).attr('height', 4).attr('x', 0).attr('y', 0);
+      var graph = this.state;
+      var dataSet = [graph.CleanRating, graph.AccuracyRating, graph.CommunicationRating, graph.LocationRating, graph.CheckinRating, graph.ValueRating];
+      d3__WEBPACK_IMPORTED_MODULE_5__["select"]('.GraphContainer').selectAll('.Rating').data(dataSet).append('svg').style('background', 'lightgrey').style('margin-bottom', '2px').attr('width', 100).attr('height', 4).attr('fill', '#008489').append('rect').attr('width', function (d) {
+        return d * 20;
+      }).attr('height', 4).attr('x', 0).attr('y', 0);
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getReviews();
-      this.addGraph();
     }
   }, {
     key: "render",
@@ -255,7 +284,14 @@ function (_React$Component) {
         className: "Reviews"
       }, "Reviews"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "ReviewNum"
-      }, this.state.reviews.length, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "reviews")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Graph_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, this.state.reviews.length, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "reviews")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Graph_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        cleanRating: this.state.CleanRating,
+        accuracyRating: this.state.AccuracyRating,
+        communicationRating: this.state.CommunicationRating,
+        locationRating: this.state.LocationRating,
+        checkinRating: this.state.CheckinRating,
+        valueRating: this.state.ValueRating
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: "ReviewSearch",
         placeholder: "Search reviews..",
@@ -309,29 +345,95 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _styles_Graph_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles/Graph.css */ "./client/src/styles/Graph.css");
-/* harmony import */ var _styles_Graph_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_styles_Graph_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _images_bathtub_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./images/bathtub.png */ "./client/src/images/bathtub.png");
+/* harmony import */ var _images_chair_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/chair.png */ "./client/src/images/chair.png");
+/* harmony import */ var _images_chatBubbles_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./images/chatBubbles.png */ "./client/src/images/chatBubbles.png");
+/* harmony import */ var _images_coffeeCup_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./images/coffeeCup.png */ "./client/src/images/coffeeCup.png");
+/* harmony import */ var _images_heart_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./images/heart.png */ "./client/src/images/heart.png");
+/* harmony import */ var _styles_Graph_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./styles/Graph.css */ "./client/src/styles/Graph.css");
+/* harmony import */ var _styles_Graph_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_styles_Graph_css__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+
 
 
 
 var Graph = function Graph(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "GraphContainer"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Cleanliness"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "FirstCol"
+  }, "Cleanliness"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "Rating"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Accuracy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "MidCol RatingNum"
+  }, props.cleanRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Accuracy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "Rating"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Communication"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "RatingNum"
+  }, props.accuracyRating)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "FirstCol"
+  }, "Communication"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "Rating"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Location"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "MidCol RatingNum"
+  }, props.communicationRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Location"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "Rating"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Check-in"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "RatingNum"
+  }, props.locationRating)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "LowerFirstCol"
+  }, "Check-in"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "Rating"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Value"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "MidCol RatingNum"
+  }, props.checkinRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Value"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "Rating"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "RatingNum"
+  }, props.valueRating))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "MiddleRow"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Sparkling Clean"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Amazing amenities"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Quick Responses"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Stylish space"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Outstanding hospitality"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)))));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "LowerFirstCol"
+  }, "Sparkling Clean"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "ImageCell"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: _images_bathtub_png__WEBPACK_IMPORTED_MODULE_1__["default"]
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "RatingNum"
+  }, "12"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Quick Responses"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "ImageCell"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: _images_chatBubbles_png__WEBPACK_IMPORTED_MODULE_3__["default"]
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "RatingNum"
+  }, "15")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    classaName: "LowerFirstCol"
+  }, "Outstanding hospitality"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "ImageCell"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: _images_heart_png__WEBPACK_IMPORTED_MODULE_5__["default"]
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "RatingNum"
+  }, "19"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Stylish space"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "ImageCell"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: _images_chair_png__WEBPACK_IMPORTED_MODULE_2__["default"]
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "RatingNum"
+  }, "13")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "FirstCol"
+  }, "Amazing amenities"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "ImageCell"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: _images_coffeeCup_png__WEBPACK_IMPORTED_MODULE_4__["default"]
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "RatingNum"
+  }, "12"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "RatingNum"
+  })))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Graph);
@@ -455,6 +557,71 @@ var ReviewFooter = function ReviewFooter(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ReviewFooter);
+
+/***/ }),
+
+/***/ "./client/src/images/bathtub.png":
+/*!***************************************!*\
+  !*** ./client/src/images/bathtub.png ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "7d02758590f39738eedc8c461307cb62.png");
+
+/***/ }),
+
+/***/ "./client/src/images/chair.png":
+/*!*************************************!*\
+  !*** ./client/src/images/chair.png ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "4ad487cc720c242d0fc6b8bcb9a1f8ee.png");
+
+/***/ }),
+
+/***/ "./client/src/images/chatBubbles.png":
+/*!*******************************************!*\
+  !*** ./client/src/images/chatBubbles.png ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "a5b9ba9312cb41767783ac6b75ee0338.png");
+
+/***/ }),
+
+/***/ "./client/src/images/coffeeCup.png":
+/*!*****************************************!*\
+  !*** ./client/src/images/coffeeCup.png ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "734a3b5fdc338bd57afcf885cba145e2.png");
+
+/***/ }),
+
+/***/ "./client/src/images/heart.png":
+/*!*************************************!*\
+  !*** ./client/src/images/heart.png ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "c4532dd1ef49ab2a7e6791b40c125390.png");
 
 /***/ }),
 
@@ -2445,7 +2612,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".GraphContainer {\n  width: 100%;\n  border-radius: 12px;\n  -webkit-box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  -moz-box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  padding: 24px 24px 16px;\n  height: 300px;\n  margin-top: 25px;\n  margin-bottom: 40px;\n  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px; */\n}\n\n.GraphContainer table {\n  width: 100%;\n  height: 100%;\n}\n\n.GraphContainer tr, .GraphContainer td {\n  height: 5px;\n  padding: 14px 0;\n  width: 25%;\n}\n\n.MiddleRow {\n  border-bottom: solid #e0e0e0 1px;\n  width: 404%;\n}\n\n.Rating {\n  color: rgb(0, 132, 137);\n  height: 5px;\n}", ""]);
+exports.push([module.i, ".GraphContainer {\n  width: 100%;\n  border-radius: 12px;\n  -webkit-box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  -moz-box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  padding: 24px 24px 16px;\n  height: 300px;\n  margin-top: 25px;\n  margin-bottom: 40px;\n  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px; */\n}\n\n.GraphContainer table {\n  width: 100%;\n  height: 100%;\n}\n\n.GraphContainer tr, .GraphContainer td {\n  height: 5px;\n  padding: 14px 0;\n}\n.GraphContainer img {\n  width: 26px;\n  margin: 0 5px 10px 0;\n  position: relative;\n  top: -5px;\n  right: 3px;\n}\n\n.MiddleRow {\n  border-bottom: solid #e0e0e0 1px;\n  width: 385%;\n}\n\n.Rating {\n  color: rgb(0, 132, 137);\n  height: 5px;\n  width: 110px;\n}\n\n.bar {\n  width: 25px;\n  height: 100px;\n  display: inline-block;\n  background-color: blue;\n}\n\n.FirstCol {\n  width: 180px;\n}\n\n.MidCol {\n  width: 100px;\n}\n\n.RatingNum {\n  font-weight: 600;\n}\n\n.LowerFirstCol {\n  width: 180px;\n}\n\n.ImageCell {\n  display: flex;\n  justify-content: flex-end;\n  align-items: baseline;\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -2463,7 +2630,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".Pagination {\n  display: flex;\n  justify-content: space-evenly;\n  list-style: none;\n}\n\n.PaginationArrow, .PaginationArrow a, .ReviewItem, .ReviewItem a {\n  text-decoration: none;\n  color: rgb(0, 132, 137)\n}", ""]);
+exports.push([module.i, ".Pagination {\n  display: flex;\n  justify-content: space-evenly;\n  align-items: center;\n  list-style: none;\n}\n\n.PaginationArrow, .PaginationArrow a, .ReviewItem, .ReviewItem a {\n  text-decoration: none;\n  color: rgb(0, 132, 137)\n}\n\n.PaginationArrow {\n  border: solid 1px #008489;\n  border-radius: 50%;\n  padding: 2px 7px 3px 5px;\n}", ""]);
 // Exports
 module.exports = exports;
 

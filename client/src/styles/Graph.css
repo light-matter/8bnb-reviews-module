@@ -19,15 +19,51 @@
 .GraphContainer tr, .GraphContainer td {
   height: 5px;
   padding: 14px 0;
-  width: 25%;
+}
+.GraphContainer img {
+  width: 26px;
+  margin: 0 5px 10px 0;
+  position: relative;
+  top: -5px;
+  right: 3px;
 }
 
 .MiddleRow {
   border-bottom: solid #e0e0e0 1px;
-  width: 404%;
+  width: 385%;
 }
 
 .Rating {
   color: rgb(0, 132, 137);
   height: 5px;
+  width: 110px;
+}
+
+.bar {
+  width: 25px;
+  height: 100px;
+  display: inline-block;
+  background-color: blue;
+}
+
+.FirstCol {
+  width: 180px;
+}
+
+.MidCol {
+  width: 100px;
+}
+
+.RatingNum {
+  font-weight: 600;
+}
+
+.LowerFirstCol {
+  width: 180px;
+}
+
+.ImageCell {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
 }

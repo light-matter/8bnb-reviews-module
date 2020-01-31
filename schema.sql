@@ -10,6 +10,12 @@ CREATE TABLE review(
   author VARCHAR(50),
   image VARCHAR(255),
   body VARCHAR(255),
+  clean_rating INT,
+  accuracy_rating INT,
+  communication_rating INT,
+  location_rating INT,
+  checkin_rating INT,
+  value_rating INT,
   host_id INT,
   created_at DATETIME NOT NULL,
   PRIMARY KEY(id)

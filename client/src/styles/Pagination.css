@@ -1,10 +1,17 @@
 .Pagination {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   list-style: none;
 }
 
 .PaginationArrow, .PaginationArrow a, .ReviewItem, .ReviewItem a {
   text-decoration: none;
   color: rgb(0, 132, 137)
+}
+
+.PaginationArrow {
+  border: solid 1px #008489;
+  border-radius: 50%;
+  padding: 2px 7px 3px 5px;
 }
