@@ -90,14 +90,14 @@ class App extends React.Component {
   }
 
   addGraph() {
-    d3.select('#CleanRating', '#AccuracyRating')
+    d3.selectAll('.Rating')
       .append('svg')
       .attr('width', 100)
-      .attr('height', 5)
+      .attr('height', 4)
       .attr('fill', '#008489')
       .append('rect')
       .attr('width', 100)
-      .attr('height', 5)
+      .attr('height', 4)
       .attr('x', 0)
       .attr('y', 0);
   }

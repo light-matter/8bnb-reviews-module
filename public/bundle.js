@@ -235,7 +235,7 @@ function (_React$Component) {
   }, {
     key: "addGraph",
     value: function addGraph() {
-      d3__WEBPACK_IMPORTED_MODULE_5__["select"]('#CleanRating', '#AccuracyRating').append('svg').attr('width', 100).attr('height', 5).attr('fill', '#008489').append('rect').attr('width', 100).attr('height', 5).attr('x', 0).attr('y', 0);
+      d3__WEBPACK_IMPORTED_MODULE_5__["selectAll"]('.Rating').append('svg').attr('width', 100).attr('height', 4).attr('fill', '#008489').append('rect').attr('width', 100).attr('height', 4).attr('x', 0).attr('y', 0);
     }
   }, {
     key: "componentDidMount",
@@ -318,17 +318,17 @@ var Graph = function Graph(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "GraphContainer"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Cleanliness"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    id: "CleanRating"
+    className: "Rating"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Accuracy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    id: "AccuracyRating"
+    className: "Rating"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Communication"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    id: "CommunicationRating"
+    className: "Rating"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Location"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    id: "LocationRating"
+    className: "Rating"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Check-in"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    id: "CheckinRating"
+    className: "Rating"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Value"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    id: "ValueRating"
+    className: "Rating"
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "MiddleRow"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Sparkling Clean"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Amazing amenities"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Quick Responses"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Stylish space"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Outstanding hospitality"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null)))));
@@ -2445,7 +2445,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".GraphContainer {\n  width: 100%;\n  border-radius: 12px;\n  -webkit-box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  -moz-box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  padding: 24px 24px 16px;\n  height: 300px;\n  margin-top: 16px;\n  margin-bottom: 24px;\n  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px; */\n}\n\n.GraphContainer table {\n  width: 100%;\n  height: 100%;\n}\n\n.GraphContainer table tr, .GraphContainer table td {\n  height: 55px;\n}\n\n.MiddleRow {\n  border-bottom: solid #e0e0e0 1px;\n  width: 182%;\n}\n\n#CleanRating {\n  color: rgb(0, 132, 137);\n  height: 5px;\n}", ""]);
+exports.push([module.i, ".GraphContainer {\n  width: 100%;\n  border-radius: 12px;\n  -webkit-box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  -moz-box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  padding: 24px 24px 16px;\n  height: 300px;\n  margin-top: 25px;\n  margin-bottom: 40px;\n  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px; */\n}\n\n.GraphContainer table {\n  width: 100%;\n  height: 100%;\n}\n\n.GraphContainer tr, .GraphContainer td {\n  height: 5px;\n  padding: 14px 0;\n  width: 25%;\n}\n\n.MiddleRow {\n  border-bottom: solid #e0e0e0 1px;\n  width: 404%;\n}\n\n.Rating {\n  color: rgb(0, 132, 137);\n  height: 5px;\n}", ""]);
 // Exports
 module.exports = exports;
 

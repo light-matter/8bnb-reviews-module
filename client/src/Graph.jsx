@@ -6,9 +6,9 @@ const Graph = (props) => {
     <div className='GraphContainer'>
       <table>
         <tbody>
-          <tr><td>Cleanliness</td><td id="CleanRating"></td><td>Accuracy</td><td id="AccuracyRating"></td></tr>
-          <tr><td>Communication</td><td id="CommunicationRating"></td><td>Location</td><td id="LocationRating"></td></tr>
-          <tr><td>Check-in</td><td id="CheckinRating"></td><td>Value</td><td id="ValueRating"></td></tr>
+          <tr><td>Cleanliness</td><td className="Rating"></td><td>Accuracy</td><td className="Rating"></td></tr>
+          <tr><td>Communication</td><td className="Rating"></td><td>Location</td><td className="Rating"></td></tr>
+          <tr><td>Check-in</td><td className="Rating"></td><td>Value</td><td className="Rating"></td></tr>
         </tbody>
         <div className="MiddleRow"></div>
         <tbody>

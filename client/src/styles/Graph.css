@@ -6,8 +6,8 @@
   box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);
   padding: 24px 24px 16px;
   height: 300px;
-  margin-top: 16px;
-  margin-bottom: 24px;
+  margin-top: 25px;
+  margin-bottom: 40px;
   /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px; */
 }
 
@@ -16,16 +16,18 @@
   height: 100%;
 }
 
-.GraphContainer table tr, .GraphContainer table td {
-  height: 55px;
+.GraphContainer tr, .GraphContainer td {
+  height: 5px;
+  padding: 14px 0;
+  width: 25%;
 }
 
 .MiddleRow {
   border-bottom: solid #e0e0e0 1px;
-  width: 182%;
+  width: 404%;
 }
 
-#CleanRating {
+.Rating {
   color: rgb(0, 132, 137);
   height: 5px;
 }
