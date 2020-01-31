@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Review from './Review.jsx';
 import ReviewFooter from './ReviewFooter.jsx';
+import Graph from './Graph.jsx';
+import * as d3 from 'd3';
 import './styles/App.css';
 
 class App extends React.Component {
@@ -15,7 +17,13 @@ class App extends React.Component {
       reviewsPerPage: 7,
       searchResults: [],
       searchInput: '',
-      searching: false
+      searching: false,
+      CleanRating: 4,
+      AccuracyRating: 5,
+      CommunicationRating: 4,
+      LocationRating: 3,
+      CheckinRating: 5,
+      ValueRating: 4
     };
     this.searchHandler = this.searchHandler.bind(this);
     this.pageHandler = this.pageHandler.bind(this);
@@ -81,8 +89,22 @@ class App extends React.Component {
     });
   }
 
+  addGraph() {
+    d3.select('#CleanRating', '#AccuracyRating')
+      .append('svg')
+      .attr('width', 100)
+      .attr('height', 5)
+      .attr('fill', '#008489')
+      .append('rect')
+      .attr('width', 100)
+      .attr('height', 5)
+      .attr('x', 0)
+      .attr('y', 0);
+  }
+
   componentDidMount() {
     this.getReviews();
+    this.addGraph();
   }
 
   render() {
@@ -97,6 +119,7 @@ class App extends React.Component {
             <h4 className="ReviewNum">{this.state.reviews.length} </h4><span >reviews</span>
           </div>
 
+          <Graph />
 
           <input
             type="text"
