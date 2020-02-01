@@ -3,6 +3,7 @@ import axios from 'axios';
 import Review from './Review.jsx';
 import ReviewFooter from './ReviewFooter.jsx';
 import Graph from './Graph.jsx';
+import star from './images/star.png';
 import * as d3 from 'd3';
 import './styles/App.css';
 
@@ -18,6 +19,7 @@ class App extends React.Component {
       searchResults: [],
       searchInput: '',
       searching: false,
+      TotalAverageRating: 0,
       CleanRating: 4,
       AccuracyRating: 5,
       CommunicationRating: 4,
@@ -111,6 +113,7 @@ class App extends React.Component {
     const reviews = this.state.reviews;
     const dataSet = [ 'clean_rating', 'accuracy_rating', 'communication_rating', 'location_rating', 'checkin_rating', 'value_rating' ];
     const ratingState = [ 'CleanRating', 'AccuracyRating', 'CommunicationRating', 'LocationRating', 'CheckinRating', 'ValueRating' ];
+    let totalAverage = 0;
 
     dataSet.forEach((rating, index ) => {
       let average = 0;
@@ -118,10 +121,17 @@ class App extends React.Component {
         average += review[rating];
       });
       average = (average / rating.length) / 5;
+      totalAverage += average;
+      console.log('checking total Average: ', totalAverage)
       average = average.toFixed(1);
       this.setState({
         [ ratingState[index] ]: average
       });
+    });
+    totalAverage = totalAverage / 6;
+    totalAverage = totalAverage.toFixed(2);
+    this.setState({
+      TotalAverageRating: totalAverage
     });
   }
 
@@ -134,9 +144,7 @@ class App extends React.Component {
       let sum = 0;
       reviews.forEach(review => {
         sum += review[fav];
-        console.log('sum: ', sum, 'review[fav]: ', review[fav]);
       });
-
       this.setState({
         [ ratingState[index] ]: sum
       });
@@ -151,7 +159,7 @@ class App extends React.Component {
       .data(dataSet)
       .append('svg')
       .style('background', 'lightgrey')
-      .style('border-radius', '30%')
+      .style('border-radius', '5px')
       .style('margin-bottom', '2px')
       .attr('width', 100)
       .attr('height', 4)
@@ -183,7 +191,7 @@ class App extends React.Component {
         <div className="ReviewTop">
           <div>
             <h4 className="Reviews">Reviews</h4>
-            <h4 className="ReviewNum">{this.state.reviews.length} </h4><span >reviews</span>
+            <h4 className="ReviewNum LeftNum"><img src={star}/>{this.state.TotalAverageRating}</h4><h4 className="ReviewNum RightNum">{this.state.reviews.length} </h4><span >reviews</span>
           </div>
 
           <Graph

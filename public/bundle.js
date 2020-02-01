@@ -102,9 +102,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Review_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Review.jsx */ "./client/src/Review.jsx");
 /* harmony import */ var _ReviewFooter_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ReviewFooter.jsx */ "./client/src/ReviewFooter.jsx");
 /* harmony import */ var _Graph_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Graph.jsx */ "./client/src/Graph.jsx");
-/* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
-/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./styles/App.css */ "./client/src/styles/App.css");
-/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_styles_App_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _images_star_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./images/star.png */ "./client/src/images/star.png");
+/* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
+/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./styles/App.css */ "./client/src/styles/App.css");
+/* harmony import */ var _styles_App_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_styles_App_css__WEBPACK_IMPORTED_MODULE_7__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -133,6 +134,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var App =
 /*#__PURE__*/
 function (_React$Component) {
@@ -152,6 +154,7 @@ function (_React$Component) {
       searchResults: [],
       searchInput: '',
       searching: false,
+      TotalAverageRating: 0,
       CleanRating: 4,
       AccuracyRating: 5,
       CommunicationRating: 4,
@@ -191,7 +194,7 @@ function (_React$Component) {
       }).then(function () {
         _this2.setFavs();
       }).then(function () {
-        d3__WEBPACK_IMPORTED_MODULE_5__["selectAll"]('svg').remove();
+        d3__WEBPACK_IMPORTED_MODULE_6__["selectAll"]('svg').remove();
 
         _this2.addGraph();
       })["catch"](function (err) {// console.log(err);
@@ -258,15 +261,23 @@ function (_React$Component) {
       var reviews = this.state.reviews;
       var dataSet = ['clean_rating', 'accuracy_rating', 'communication_rating', 'location_rating', 'checkin_rating', 'value_rating'];
       var ratingState = ['CleanRating', 'AccuracyRating', 'CommunicationRating', 'LocationRating', 'CheckinRating', 'ValueRating'];
+      var totalAverage = 0;
       dataSet.forEach(function (rating, index) {
         var average = 0;
         reviews.forEach(function (review) {
           average += review[rating];
         });
         average = average / rating.length / 5;
+        totalAverage += average;
+        console.log('checking total Average: ', totalAverage);
         average = average.toFixed(1);
 
         _this3.setState(_defineProperty({}, ratingState[index], average));
+      });
+      totalAverage = totalAverage / 6;
+      totalAverage = totalAverage.toFixed(2);
+      this.setState({
+        TotalAverageRating: totalAverage
       });
     }
   }, {
@@ -281,7 +292,6 @@ function (_React$Component) {
         var sum = 0;
         reviews.forEach(function (review) {
           sum += review[fav];
-          console.log('sum: ', sum, 'review[fav]: ', review[fav]);
         });
 
         _this4.setState(_defineProperty({}, ratingState[index], sum));
@@ -292,7 +302,7 @@ function (_React$Component) {
     value: function addGraph() {
       var graph = this.state;
       var dataSet = [graph.CleanRating, graph.AccuracyRating, graph.CommunicationRating, graph.LocationRating, graph.CheckinRating, graph.ValueRating];
-      d3__WEBPACK_IMPORTED_MODULE_5__["select"]('.GraphContainer').selectAll('.Rating').data(dataSet).append('svg').style('background', 'lightgrey').style('border-radius', '30%').style('margin-bottom', '2px').attr('width', 100).attr('height', 4).attr('fill', '#008489').append('rect').attr('width', function (d) {
+      d3__WEBPACK_IMPORTED_MODULE_6__["select"]('.GraphContainer').selectAll('.Rating').data(dataSet).append('svg').style('background', 'lightgrey').style('border-radius', '5px').style('margin-bottom', '2px').attr('width', 100).attr('height', 4).attr('fill', '#008489').append('rect').attr('width', function (d) {
         return d * 20;
       }).attr('height', 4).attr('x', 0).attr('y', 0);
     }
@@ -320,7 +330,11 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "Reviews"
       }, "Reviews"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-        className: "ReviewNum"
+        className: "ReviewNum LeftNum"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: _images_star_png__WEBPACK_IMPORTED_MODULE_5__["default"]
+      }), this.state.TotalAverageRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "ReviewNum RightNum"
       }, this.state.reviews.length, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "reviews")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Graph_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
         cleanRating: this.state.CleanRating,
         accuracyRating: this.state.AccuracyRating,
@@ -680,6 +694,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "c4532dd1ef49ab2a7e6791b40c125390.png");
+
+/***/ }),
+
+/***/ "./client/src/images/star.png":
+/*!************************************!*\
+  !*** ./client/src/images/star.png ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "cc9a477ef46d960ae915498d3255f5ce.png");
 
 /***/ }),
 
@@ -2652,7 +2679,7 @@ module.exports = {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  margin: 0 auto;\n  padding: 0;\n  font-size: 16px;\n  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;\n  color: rgb(72, 72, 72);\n  width: 700px;\n}\n\n.Reviews {\n  font-size: 24px;\n}\n\n.ReviewNum {\n  display: inline;\n}\n\n.ReviewSearch {\n  border-radius: 5px;\n  font-size: 14px;\n  letter-spacing: normal;\n  color: #484848;\n  padding: 8px 7px;\n  font-weight: 400;\n  border: solid 1px #e0e0e0;\n  display: block;\n  width: 310px;\n  margin: 22px 0 0 0;\n}\n\n.ReviewTop {\n  margin-bottom: -25px;\n}\n\n.ButtonContainer {\n  position: relative;\n  width: 65px;\n  display: flex;\n  justify-content: flex-end;\n  top: -33px;\n  right: -258px;\n}\n\n.CancelSearchBtn {\n  border: none;\n  padding: 7px;\n  color: lightslategrey;\n  font-weight: 600;\n  margin-right: 6px;\n}\n\n.SearchBtn {\n  position: relative;\n  border-radius: 5px;\n  height: 30px;\n  border-color: transparent;\n}", ""]);
+exports.push([module.i, "body {\n  margin: 0 auto;\n  padding: 0;\n  font-size: 16px;\n  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;\n  color: rgb(72, 72, 72);\n  width: 700px;\n}\n\n.Reviews {\n  font-size: 24px;\n}\n\n.ReviewNum {\n  display: inline;\n}\n\n.RightNum {\n  border-left: solid 1px #eaeaea;\n  margin-left: 15px;\n  padding-left: 15px;\n}\n\n.ReviewNum img {\n  width: 15px;\n  margin: 0 5px -2px;\n}\n\n.ReviewSearch {\n  border-radius: 5px;\n  font-size: 14px;\n  letter-spacing: normal;\n  color: #484848;\n  padding: 8px 7px;\n  font-weight: 400;\n  border: solid 1px #e0e0e0;\n  display: block;\n  width: 310px;\n  margin: 22px 0 0 0;\n}\n\n.ReviewTop {\n  margin-bottom: -25px;\n}\n\n.ButtonContainer {\n  position: relative;\n  width: 65px;\n  display: flex;\n  justify-content: flex-end;\n  top: -33px;\n  right: -258px;\n}\n\n.CancelSearchBtn {\n  border: none;\n  padding: 7px;\n  color: lightslategrey;\n  font-weight: 600;\n  margin-right: 6px;\n}\n\n.SearchBtn {\n  position: relative;\n  border-radius: 5px;\n  height: 30px;\n  border-color: transparent;\n}", ""]);
 // Exports
 module.exports = exports;
 
