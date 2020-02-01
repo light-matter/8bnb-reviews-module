@@ -23,13 +23,20 @@ class App extends React.Component {
       CommunicationRating: 4,
       LocationRating: 3,
       CheckinRating: 5,
-      ValueRating: 4
+      ValueRating: 4,
+      CleanFav: 0,
+      ResponseFav: 0,
+      HospitalityFav: 0,
+      StylishFav: 0,
+      AmenitiesFav: 0
     };
     this.searchHandler = this.searchHandler.bind(this);
     this.pageHandler = this.pageHandler.bind(this);
     this.inputHandler = this.inputHandler.bind(this);
     this.getReviews = this.getReviews.bind(this);
     this.setRatings = this.setRatings.bind(this);
+    this.cancelSearchHandler = this.cancelSearchHandler.bind(this);
+    this.setFavs = this.setFavs.bind(this);
   }
 
   getReviews() {
@@ -45,6 +52,10 @@ class App extends React.Component {
         this.setRatings();
       })
       .then(() => {
+        this.setFavs();
+      })
+      .then(() => {
+        d3.selectAll('svg').remove();
         this.addGraph();
       })
       .catch((err) => {
@@ -110,7 +121,25 @@ class App extends React.Component {
       average = average.toFixed(1);
       this.setState({
         [ ratingState[index] ]: average
-      }, console.log('average: ', this.state.AccuracyRating));
+      });
+    });
+  }
+
+  setFavs() {
+    const reviews = this.state.reviews;
+    const dataSet = [ 'clean_fav', 'response_fav', 'hospitality_fav', 'stylish_fav', 'amenities_fav' ];
+    const ratingState = [ 'CleanFav', 'ResponseFav', 'HospitalityFav', 'StylishFav', 'AmenitiesFav' ];
+
+    dataSet.forEach((fav, index ) => {
+      let sum = 0;
+      reviews.forEach(review => {
+        sum += review[fav];
+        console.log('sum: ', sum, 'review[fav]: ', review[fav]);
+      });
+
+      this.setState({
+        [ ratingState[index] ]: sum
+      });
     });
   }
 
@@ -122,6 +151,7 @@ class App extends React.Component {
       .data(dataSet)
       .append('svg')
       .style('background', 'lightgrey')
+      .style('border-radius', '30%')
       .style('margin-bottom', '2px')
       .attr('width', 100)
       .attr('height', 4)
@@ -133,6 +163,12 @@ class App extends React.Component {
       .attr('y', 0);
   }
 
+  cancelSearchHandler() {
+    this.getReviews();
+    this.setState({
+      searchInput: ''
+    });
+  }
 
   componentDidMount() {
     this.getReviews();
@@ -157,6 +193,11 @@ class App extends React.Component {
             locationRating={this.state.LocationRating}
             checkinRating={this.state.CheckinRating}
             valueRating={this.state.ValueRating}
+            cleanFav={this.state.CleanFav}
+            responseFav={this.state.ResponseFav}
+            hospitalityFav={this.state.HospitalityFav}
+            stylishFav={this.state.StylishFav}
+            amenitiesFav={this.state.AmenitiesFav}
           />
 
           <input
@@ -171,10 +212,11 @@ class App extends React.Component {
             <button
               className="CancelSearchBtn"
               style={{display: this.state.searching ? 'block' : 'none' }}
-              onClick={this.getReviews}>
-                x
+              onClick={this.cancelSearchHandler}>
+                X
             </button>
             <button
+              style={{display: this.state.searching ? 'none' : 'block' }}
               onClick={this.searchHandler}
               type="submit"
               className="SearchBtn">
@@ -195,6 +237,7 @@ class App extends React.Component {
         <ReviewFooter
           reviews={this.state.reviews}
           reviewsPerPage={this.state.reviewsPerPage}
+          currentPage={this.state.currentPage}
           pageHandler={this.pageHandler}
         />
       </div>

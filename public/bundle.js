@@ -157,13 +157,20 @@ function (_React$Component) {
       CommunicationRating: 4,
       LocationRating: 3,
       CheckinRating: 5,
-      ValueRating: 4
+      ValueRating: 4,
+      CleanFav: 0,
+      ResponseFav: 0,
+      HospitalityFav: 0,
+      StylishFav: 0,
+      AmenitiesFav: 0
     };
     _this.searchHandler = _this.searchHandler.bind(_assertThisInitialized(_this));
     _this.pageHandler = _this.pageHandler.bind(_assertThisInitialized(_this));
     _this.inputHandler = _this.inputHandler.bind(_assertThisInitialized(_this));
     _this.getReviews = _this.getReviews.bind(_assertThisInitialized(_this));
     _this.setRatings = _this.setRatings.bind(_assertThisInitialized(_this));
+    _this.cancelSearchHandler = _this.cancelSearchHandler.bind(_assertThisInitialized(_this));
+    _this.setFavs = _this.setFavs.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -182,6 +189,10 @@ function (_React$Component) {
       }).then(function () {
         _this2.setRatings();
       }).then(function () {
+        _this2.setFavs();
+      }).then(function () {
+        d3__WEBPACK_IMPORTED_MODULE_5__["selectAll"]('svg').remove();
+
         _this2.addGraph();
       })["catch"](function (err) {// console.log(err);
       });
@@ -255,7 +266,25 @@ function (_React$Component) {
         average = average / rating.length / 5;
         average = average.toFixed(1);
 
-        _this3.setState(_defineProperty({}, ratingState[index], average), console.log('average: ', _this3.state.AccuracyRating));
+        _this3.setState(_defineProperty({}, ratingState[index], average));
+      });
+    }
+  }, {
+    key: "setFavs",
+    value: function setFavs() {
+      var _this4 = this;
+
+      var reviews = this.state.reviews;
+      var dataSet = ['clean_fav', 'response_fav', 'hospitality_fav', 'stylish_fav', 'amenities_fav'];
+      var ratingState = ['CleanFav', 'ResponseFav', 'HospitalityFav', 'StylishFav', 'AmenitiesFav'];
+      dataSet.forEach(function (fav, index) {
+        var sum = 0;
+        reviews.forEach(function (review) {
+          sum += review[fav];
+          console.log('sum: ', sum, 'review[fav]: ', review[fav]);
+        });
+
+        _this4.setState(_defineProperty({}, ratingState[index], sum));
       });
     }
   }, {
@@ -263,9 +292,17 @@ function (_React$Component) {
     value: function addGraph() {
       var graph = this.state;
       var dataSet = [graph.CleanRating, graph.AccuracyRating, graph.CommunicationRating, graph.LocationRating, graph.CheckinRating, graph.ValueRating];
-      d3__WEBPACK_IMPORTED_MODULE_5__["select"]('.GraphContainer').selectAll('.Rating').data(dataSet).append('svg').style('background', 'lightgrey').style('margin-bottom', '2px').attr('width', 100).attr('height', 4).attr('fill', '#008489').append('rect').attr('width', function (d) {
+      d3__WEBPACK_IMPORTED_MODULE_5__["select"]('.GraphContainer').selectAll('.Rating').data(dataSet).append('svg').style('background', 'lightgrey').style('border-radius', '30%').style('margin-bottom', '2px').attr('width', 100).attr('height', 4).attr('fill', '#008489').append('rect').attr('width', function (d) {
         return d * 20;
       }).attr('height', 4).attr('x', 0).attr('y', 0);
+    }
+  }, {
+    key: "cancelSearchHandler",
+    value: function cancelSearchHandler() {
+      this.getReviews();
+      this.setState({
+        searchInput: ''
+      });
     }
   }, {
     key: "componentDidMount",
@@ -290,7 +327,12 @@ function (_React$Component) {
         communicationRating: this.state.CommunicationRating,
         locationRating: this.state.LocationRating,
         checkinRating: this.state.CheckinRating,
-        valueRating: this.state.ValueRating
+        valueRating: this.state.ValueRating,
+        cleanFav: this.state.CleanFav,
+        responseFav: this.state.ResponseFav,
+        hospitalityFav: this.state.HospitalityFav,
+        stylishFav: this.state.StylishFav,
+        amenitiesFav: this.state.AmenitiesFav
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: "ReviewSearch",
@@ -305,8 +347,11 @@ function (_React$Component) {
         style: {
           display: this.state.searching ? 'block' : 'none'
         },
-        onClick: this.getReviews
-      }, "x"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.cancelSearchHandler
+      }, "X"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        style: {
+          display: this.state.searching ? 'none' : 'block'
+        },
         onClick: this.searchHandler,
         type: "submit",
         className: "SearchBtn"
@@ -322,6 +367,7 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReviewFooter_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
         reviews: this.state.reviews,
         reviewsPerPage: this.state.reviewsPerPage,
+        currentPage: this.state.currentPage,
         pageHandler: this.pageHandler
       }));
     }
@@ -403,27 +449,27 @@ var Graph = function Graph(props) {
     src: _images_bathtub_png__WEBPACK_IMPORTED_MODULE_1__["default"]
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "RatingNum"
-  }, "12"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Quick Responses"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, props.cleanFav), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Quick Responses"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "ImageCell"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: _images_chatBubbles_png__WEBPACK_IMPORTED_MODULE_3__["default"]
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "RatingNum"
-  }, "15")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    classaName: "LowerFirstCol"
+  }, props.responseFav)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    className: "LowerFirstCol"
   }, "Outstanding hospitality"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "ImageCell"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: _images_heart_png__WEBPACK_IMPORTED_MODULE_5__["default"]
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "RatingNum"
-  }, "19"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Stylish space"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, props.hospitalityFav), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Stylish space"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "ImageCell"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: _images_chair_png__WEBPACK_IMPORTED_MODULE_2__["default"]
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "RatingNum"
-  }, "13")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, props.stylishFav)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "FirstCol"
   }, "Amazing amenities"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "ImageCell"
@@ -431,7 +477,7 @@ var Graph = function Graph(props) {
     src: _images_coffeeCup_png__WEBPACK_IMPORTED_MODULE_4__["default"]
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "RatingNum"
-  }, "12"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, props.amenitiesFav), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "RatingNum"
   })))));
 };
@@ -458,10 +504,21 @@ __webpack_require__.r(__webpack_exports__);
 
 var Pagination = function Pagination(props) {
   var pageNumbers = [];
+  var totalPages = Math.ceil(props.reviews.length / props.reviewsPerPage);
 
-  for (var i = 1; i <= Math.ceil(props.reviews.length / props.reviewsPerPage); i++) {
-    pageNumbers.push(i);
-  }
+  if (totalPages < 6) {
+    for (var i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
+  } else if (totalPages >= 6) {
+    for (var _i = 1; _i <= 3; _i++) {
+      pageNumbers.push(_i);
+    }
+
+    pageNumbers.push('...', totalPages);
+  } // pages = 1, 2, 3, 4, 5
+  // pages.length > 5 ? currPage + 2 + ... + last
+
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "Pagination"
@@ -550,6 +607,7 @@ var ReviewFooter = function ReviewFooter(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Pagination_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
     reviews: props.reviews,
     reviewsPerPage: props.reviewsPerPage,
+    currentPage: props.currentPage,
     pageHandler: props.pageHandler
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "This host has 23 reviews for other properties."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "ReviewFooterButton"
@@ -2594,7 +2652,7 @@ module.exports = {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  margin: 0 auto;\n  padding: 0;\n  font-size: 16px;\n  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;\n  color: rgb(72, 72, 72);\n  width: 700px;\n}\n\n.Reviews {\n  font-size: 24px;\n}\n\n.ReviewNum {\n  display: inline;\n}\n\n.ReviewSearch {\n  border-radius: 5px;\n  font-size: 14px;\n  letter-spacing: normal;\n  color: #484848;\n  padding: 8px 7px;\n  font-weight: 400;\n  border: solid 1px #e0e0e0;\n  display: block;\n  width: 310px;\n  margin: 22px 0 0 0;\n}\n\n.ReviewTop {\n  margin-bottom: -25px;\n}\n\n.ButtonContainer {\n  position: relative;\n  width: 65px;\n  display: flex;\n  justify-content: flex-end;\n  top: -33px;\n  right: -258px;\n}\n\n.CancelSearchBtn {\n  border: none;\n  padding: 7px;\n  color: lightslategrey;\n  font-weight: 100;\n  margin-right: 6px;\n}\n\n.SearchBtn {\n  position: relative;\n  border-radius: 5px;\n  height: 30px;\n  border-color: transparent;\n}", ""]);
+exports.push([module.i, "body {\n  margin: 0 auto;\n  padding: 0;\n  font-size: 16px;\n  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;\n  color: rgb(72, 72, 72);\n  width: 700px;\n}\n\n.Reviews {\n  font-size: 24px;\n}\n\n.ReviewNum {\n  display: inline;\n}\n\n.ReviewSearch {\n  border-radius: 5px;\n  font-size: 14px;\n  letter-spacing: normal;\n  color: #484848;\n  padding: 8px 7px;\n  font-weight: 400;\n  border: solid 1px #e0e0e0;\n  display: block;\n  width: 310px;\n  margin: 22px 0 0 0;\n}\n\n.ReviewTop {\n  margin-bottom: -25px;\n}\n\n.ButtonContainer {\n  position: relative;\n  width: 65px;\n  display: flex;\n  justify-content: flex-end;\n  top: -33px;\n  right: -258px;\n}\n\n.CancelSearchBtn {\n  border: none;\n  padding: 7px;\n  color: lightslategrey;\n  font-weight: 600;\n  margin-right: 6px;\n}\n\n.SearchBtn {\n  position: relative;\n  border-radius: 5px;\n  height: 30px;\n  border-color: transparent;\n}", ""]);
 // Exports
 module.exports = exports;
 

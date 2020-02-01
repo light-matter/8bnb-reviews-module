@@ -8,6 +8,7 @@ const ReviewFooter = (props) => {
       <Pagination
         reviews={props.reviews}
         reviewsPerPage={props.reviewsPerPage}
+        currentPage={props.currentPage}
         pageHandler={props.pageHandler}
       />
       <p>This host has 23 reviews for other properties.</p>

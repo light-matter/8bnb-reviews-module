@@ -41,23 +41,23 @@ const Graph = (props) => {
           <tr>
             <td className="LowerFirstCol">Sparkling Clean</td>
             <td className="ImageCell"><img src={bathtub} /></td>
-            <td className="RatingNum">12</td>
+            <td className="RatingNum">{props.cleanFav}</td>
             <td>Quick Responses</td>
             <td className="ImageCell"><img src={chatBubble} /></td>
-            <td className="RatingNum">15</td>
+            <td className="RatingNum">{props.responseFav}</td>
           </tr>
           <tr>
-            <td classaName="LowerFirstCol">Outstanding hospitality</td>
+            <td className="LowerFirstCol">Outstanding hospitality</td>
             <td className="ImageCell"><img src={heart} /></td>
-            <td className="RatingNum">19</td>
+            <td className="RatingNum">{props.hospitalityFav}</td>
             <td>Stylish space</td>
             <td className="ImageCell"><img src={chair} /></td>
-            <td className="RatingNum">13</td>
+            <td className="RatingNum">{props.stylishFav}</td>
           </tr>
           <tr>
             <td className="FirstCol">Amazing amenities</td>
             <td className="ImageCell"><img src={coffeeCup} /></td>
-            <td className="RatingNum">12</td>
+            <td className="RatingNum">{props.amenitiesFav}</td>
             <td></td>
             <td></td>
             <td className="RatingNum"></td>

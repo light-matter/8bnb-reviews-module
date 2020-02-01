@@ -4,9 +4,22 @@ import './styles/Pagination.css';
 const Pagination = (props) => {
 
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(props.reviews.length / props.reviewsPerPage); i++) {
-    pageNumbers.push(i);
+  const totalPages = Math.ceil(props.reviews.length / props.reviewsPerPage)
+
+  if (totalPages < 6) {
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
+  } else if (totalPages >= 6) {
+    for (let i = 1; i <= 3; i++) {
+      pageNumbers.push(i);
+    }
+    pageNumbers.push('...', totalPages);
+
   }
+
+  // pages = 1, 2, 3, 4, 5
+  // pages.length > 5 ? currPage + 2 + ... + last
 
   return (
     <ul className="Pagination">
