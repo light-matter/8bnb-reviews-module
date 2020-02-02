@@ -269,7 +269,6 @@ function (_React$Component) {
         });
         average = average / rating.length / 5;
         totalAverage += average;
-        console.log('checking total Average: ', totalAverage);
         average = average.toFixed(1);
 
         _this3.setState(_defineProperty({}, ratingState[index], average));
@@ -530,7 +529,8 @@ var Pagination = function Pagination(props) {
     }
 
     pageNumbers.push('...', totalPages);
-  } // pages = 1, 2, 3, 4, 5
+  } // pages = 1, ..., 4, 5, ..., 16
+  // pages = 1, 2, 3, 4, 5
   // pages.length > 5 ? currPage + 2 + ... + last
 
 

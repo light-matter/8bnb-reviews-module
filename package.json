@@ -8,12 +8,12 @@
     "node": "12.^14.1"
   },
   "scripts": {
-    "start": "nodemon ./server/index.js",
+    "migrate": "mysql -u student -p < schema.sql",
+    "start": "npm install & node seed.js & nodemon ./server/index.js",
     "start-dev": "webpack-dev-server --open",
     "build": "webpack --watch",
     "seed": "node seed.js",
-    "test": "jest --watch",
-    "migrate": "mysql -u student -p < schema.sql"
+    "test": "jest --watch"
   },
   "dependencies": {
     "axios": "^0.19.2",

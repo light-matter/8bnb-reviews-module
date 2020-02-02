@@ -15,9 +15,8 @@ const Pagination = (props) => {
       pageNumbers.push(i);
     }
     pageNumbers.push('...', totalPages);
-
   }
-
+  // pages = 1, ..., 4, 5, ..., 16
   // pages = 1, 2, 3, 4, 5
   // pages.length > 5 ? currPage + 2 + ... + last
 

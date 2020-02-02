@@ -114,7 +114,6 @@ class App extends React.Component {
     const dataSet = [ 'clean_rating', 'accuracy_rating', 'communication_rating', 'location_rating', 'checkin_rating', 'value_rating' ];
     const ratingState = [ 'CleanRating', 'AccuracyRating', 'CommunicationRating', 'LocationRating', 'CheckinRating', 'ValueRating' ];
     let totalAverage = 0;
-
     dataSet.forEach((rating, index ) => {
       let average = 0;
       reviews.forEach(review => {
@@ -122,7 +121,6 @@ class App extends React.Component {
       });
       average = (average / rating.length) / 5;
       totalAverage += average;
-      console.log('checking total Average: ', totalAverage)
       average = average.toFixed(1);
       this.setState({
         [ ratingState[index] ]: average
