@@ -8,8 +8,8 @@
     "node": "12.^14.1"
   },
   "scripts": {
-    "migrate": "mysql -u student -p < schema.sql",
-    "start": "npm install & node seed.js & nodemon ./server/index.js",
+    "migrate": "mysql -u root -p < schema.sql",
+    "start": "nodemon ./server/index.js",
     "start-dev": "webpack-dev-server --open",
     "build": "webpack --watch",
     "seed": "node seed.js",

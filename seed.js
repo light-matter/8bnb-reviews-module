@@ -3,8 +3,8 @@ var faker = require('faker');
 
 var connection = mysql.createConnection({
   host: 'localhost',
-  user: 'student',
-  password: 'student',
+  user: 'root',
+  password: '',
   database: 'reviews'
 });
 
