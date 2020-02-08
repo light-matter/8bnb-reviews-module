@@ -135,17 +135,17 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var App =
+var Reviews =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(App, _React$Component);
+  _inherits(Reviews, _React$Component);
 
-  function App(props) {
+  function Reviews(props) {
     var _this;
 
-    _classCallCheck(this, App);
+    _classCallCheck(this, Reviews);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Reviews).call(this, props));
     _this.state = {
       reviews: [],
       paginatedReviews: [],
@@ -177,12 +177,12 @@ function (_React$Component) {
     return _this;
   }
 
-  _createClass(App, [{
+  _createClass(Reviews, [{
     key: "getReviews",
     value: function getReviews() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/reviews').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://localhost:3003/reviews').then(function (response) {
         _this2.paginate(response.data);
 
         _this2.setState({
@@ -386,10 +386,10 @@ function (_React$Component) {
     }
   }]);
 
-  return App;
+  return Reviews;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (App);
+/* harmony default export */ __webpack_exports__["default"] = (Reviews);
 
 /***/ }),
 
@@ -422,7 +422,9 @@ __webpack_require__.r(__webpack_exports__);
 var Graph = function Graph(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "GraphContainer"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "MiddleRow"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "FirstCol"
   }, "Cleanliness"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "Rating"
@@ -452,47 +454,7 @@ var Graph = function Graph(props) {
     className: "Rating"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     className: "RatingNum"
-  }, props.valueRating))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "MiddleRow"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "LowerFirstCol"
-  }, "Sparkling Clean"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "ImageCell"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: _images_bathtub_png__WEBPACK_IMPORTED_MODULE_1__["default"]
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "RatingNum"
-  }, props.cleanFav), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Quick Responses"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "ImageCell"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: _images_chatBubbles_png__WEBPACK_IMPORTED_MODULE_3__["default"]
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "RatingNum"
-  }, props.responseFav)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "LowerFirstCol"
-  }, "Outstanding hospitality"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "ImageCell"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: _images_heart_png__WEBPACK_IMPORTED_MODULE_5__["default"]
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "RatingNum"
-  }, props.hospitalityFav), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Stylish space"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "ImageCell"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: _images_chair_png__WEBPACK_IMPORTED_MODULE_2__["default"]
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "RatingNum"
-  }, props.stylishFav)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "FirstCol"
-  }, "Amazing amenities"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "ImageCell"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: _images_coffeeCup_png__WEBPACK_IMPORTED_MODULE_4__["default"]
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "RatingNum"
-  }, props.amenitiesFav), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-    className: "RatingNum"
-  })))));
+  }, props.valueRating)))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Graph);
@@ -727,7 +689,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('app'));
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('reviews'));
 
 /***/ }),
 
@@ -2679,7 +2641,7 @@ module.exports = {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  margin: 0 auto;\n  padding: 0;\n  font-size: 16px;\n  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;\n  color: rgb(72, 72, 72);\n  width: 700px;\n}\n\n.Reviews {\n  font-size: 24px;\n}\n\n.ReviewNum {\n  display: inline;\n}\n\n.RightNum {\n  border-left: solid 1px #eaeaea;\n  margin-left: 15px;\n  padding-left: 15px;\n}\n\n.ReviewNum img {\n  width: 15px;\n  margin: 0 5px -2px;\n}\n\n.ReviewSearch {\n  border-radius: 5px;\n  font-size: 14px;\n  letter-spacing: normal;\n  color: #484848;\n  padding: 8px 7px;\n  font-weight: 400;\n  border: solid 1px #e0e0e0;\n  display: block;\n  width: 310px;\n  margin: 22px 0 0 0;\n}\n\n.ReviewTop {\n  margin-bottom: -25px;\n}\n\n.ButtonContainer {\n  position: relative;\n  width: 65px;\n  display: flex;\n  justify-content: flex-end;\n  top: -33px;\n  right: -258px;\n}\n\n.CancelSearchBtn {\n  border: none;\n  padding: 7px;\n  color: lightslategrey;\n  font-weight: 600;\n  margin-right: 6px;\n}\n\n.SearchBtn {\n  position: relative;\n  border-radius: 5px;\n  height: 30px;\n  border-color: transparent;\n}", ""]);
+exports.push([module.i, "body {\n  padding: 0;\n  font-size: 16px;\n  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;\n  color: rgb(72, 72, 72);\n  width: 700px;\n}\n\n.Reviews {\n  font-size: 24px;\n}\n\n.ReviewNum {\n  display: inline;\n}\n\n.RightNum {\n  border-left: solid 1px #eaeaea;\n  margin-left: 15px;\n  padding-left: 15px;\n}\n\n.ReviewNum img {\n  width: 15px;\n  margin: 0 5px -2px;\n}\n\n.ReviewSearch {\n  border-radius: 5px;\n  font-size: 14px;\n  letter-spacing: normal;\n  color: #484848;\n  padding: 8px 7px;\n  font-weight: 400;\n  border: solid 1px #e0e0e0;\n  display: block;\n  width: 310px;\n  margin: 22px 0 0 0;\n}\n\n.ReviewTop {\n  margin-bottom: -25px;\n}\n\n.ButtonContainer {\n  position: relative;\n  width: 65px;\n  display: flex;\n  justify-content: flex-end;\n  top: -33px;\n  right: -258px;\n}\n\n.CancelSearchBtn {\n  border: none;\n  padding: 7px;\n  color: lightslategrey;\n  font-weight: 600;\n  margin-right: 6px;\n}\n\n.SearchBtn {\n  position: relative;\n  border-radius: 5px;\n  height: 30px;\n  border-color: transparent;\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -2697,7 +2659,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".GraphContainer {\n  width: 100%;\n  border-radius: 12px;\n  -webkit-box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  -moz-box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  padding: 24px 24px 16px;\n  height: 300px;\n  margin-top: 25px;\n  margin-bottom: 40px;\n  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px; */\n}\n\n.GraphContainer table {\n  width: 100%;\n  height: 100%;\n}\n\n.GraphContainer tr, .GraphContainer td {\n  height: 5px;\n  padding: 14px 0;\n}\n.GraphContainer img {\n  width: 26px;\n  margin: 0 5px 10px 0;\n  position: relative;\n  top: -5px;\n  right: 3px;\n}\n\n.MiddleRow {\n  border-bottom: solid #e0e0e0 1px;\n  width: 385%;\n}\n\n.Rating {\n  color: rgb(0, 132, 137);\n  height: 5px;\n  width: 110px;\n}\n\n.bar {\n  width: 25px;\n  height: 100px;\n  display: inline-block;\n  background-color: blue;\n}\n\n.FirstCol {\n  width: 180px;\n}\n\n.MidCol {\n  width: 100px;\n}\n\n.RatingNum {\n  font-weight: 600;\n}\n\n.LowerFirstCol {\n  width: 180px;\n}\n\n.ImageCell {\n  display: flex;\n  justify-content: flex-end;\n  align-items: baseline;\n}", ""]);
+exports.push([module.i, ".GraphContainer {\n  width: 100%;\n  border-radius: 12px;\n  /* -webkit-box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  -moz-box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);\n  padding: 24px 24px 16px; */\n  height: 120px;\n  margin-top: 25px;\n  margin-bottom: 40px;\n  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px; */\n}\n\n.GraphContainer table {\n  width: 100%;\n  height: 50%;\n}\n\n.GraphContainer tr, .GraphContainer td {\n  height: 5px;\n  padding: 14px 0;\n}\n.GraphContainer img {\n  width: 26px;\n  margin: 0 5px 10px 0;\n  position: relative;\n  top: -5px;\n  right: 3px;\n}\n\n.MiddleRow {\n  border-bottom: solid #e0e0e0 1px;\n  width: 100%;\n}\n\n.Rating {\n  color: rgb(0, 132, 137);\n  height: 5px;\n  width: 110px;\n}\n\n.bar {\n  width: 25px;\n  height: 100px;\n  display: inline-block;\n  background-color: blue;\n}\n\n.FirstCol {\n  width: 180px;\n}\n\n.MidCol {\n  width: 100px;\n}\n\n.RatingNum {\n  font-weight: 600;\n}\n\n.LowerFirstCol {\n  width: 180px;\n}\n\n.ImageCell {\n  display: flex;\n  justify-content: flex-end;\n  align-items: baseline;\n}", ""]);
 // Exports
 module.exports = exports;
 
