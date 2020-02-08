@@ -9,7 +9,7 @@
   },
   "scripts": {
     "migrate": "mysql -u root -p < schema.sql",
-    "start": "nodemon ./server/index.js",
+    "start": "node ./server/index.js",
     "start-dev": "webpack-dev-server --open",
     "build": "webpack --watch",
     "seed": "node seed.js",
