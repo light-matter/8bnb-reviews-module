@@ -9,6 +9,7 @@ import './styles/Graph.css';
 const Graph = (props) => {
   return (
     <div className='GraphContainer'>
+      <div className="MiddleRow"></div>
       <table>
         <tbody>
           <tr>
@@ -36,8 +37,8 @@ const Graph = (props) => {
             <td className="RatingNum">{props.valueRating}</td>
           </tr>
         </tbody>
-        <div className="MiddleRow"></div>
-        <tbody>
+      </table>
+        {/* <tbody>
           <tr>
             <td className="LowerFirstCol">Sparkling Clean</td>
             <td className="ImageCell"><img src={bathtub} /></td>
@@ -62,8 +63,8 @@ const Graph = (props) => {
             <td></td>
             <td className="RatingNum"></td>
           </tr>
-        </tbody>
-      </table>
+        </tbody> */}
+
     </div>
   );
 };

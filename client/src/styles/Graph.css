@@ -1,11 +1,11 @@
 .GraphContainer {
   width: 100%;
   border-radius: 12px;
-  -webkit-box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);
+  /* -webkit-box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);
   -moz-box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);
   box-shadow: 0px 0px 9px 4px rgba(234,234,234,1);
-  padding: 24px 24px 16px;
-  height: 300px;
+  padding: 24px 24px 16px; */
+  height: 120px;
   margin-top: 25px;
   margin-bottom: 40px;
   /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px; */
@@ -13,7 +13,7 @@
 
 .GraphContainer table {
   width: 100%;
-  height: 100%;
+  height: 50%;
 }
 
 .GraphContainer tr, .GraphContainer td {
@@ -30,7 +30,7 @@
 
 .MiddleRow {
   border-bottom: solid #e0e0e0 1px;
-  width: 385%;
+  width: 100%;
 }
 
 .Rating {

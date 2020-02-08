@@ -7,7 +7,7 @@ import star from './images/star.png';
 import * as d3 from 'd3';
 import './styles/App.css';
 
-class App extends React.Component {
+class Reviews extends React.Component {
   constructor(props) {
     super(props);
 
@@ -42,7 +42,7 @@ class App extends React.Component {
   }
 
   getReviews() {
-    axios.get('/reviews')
+    axios.get('http://localhost:3003/reviews')
       .then((response) => {
         this.paginate(response.data);
         this.setState({
@@ -251,4 +251,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Reviews;
