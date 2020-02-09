@@ -42,7 +42,7 @@ class Reviews extends React.Component {
   }
 
   getReviews() {
-    axios.get('http://localhost:3003/reviews')
+    axios.get('http://ec2-18-224-18-111.us-east-2.compute.amazonaws.com:3003/reviews')
       .then((response) => {
         this.paginate(response.data);
         this.setState({
