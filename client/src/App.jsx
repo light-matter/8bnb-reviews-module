@@ -57,7 +57,7 @@ class Reviews extends React.Component {
         this.setFavs();
       })
       .then(() => {
-        d3.selectAll('svg').remove();
+        d3.select('.GraphContainer').selectAll('svg').remove();
         this.addGraph();
       })
       .catch((err) => {
