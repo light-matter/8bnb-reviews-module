@@ -182,7 +182,7 @@ function (_React$Component) {
     value: function getReviews() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://localhost:3003/reviews').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/reviews').then(function (response) {
         _this2.paginate(response.data);
 
         _this2.setState({
@@ -194,7 +194,7 @@ function (_React$Component) {
       }).then(function () {
         _this2.setFavs();
       }).then(function () {
-        d3__WEBPACK_IMPORTED_MODULE_6__["selectAll"]('svg').remove();
+        d3__WEBPACK_IMPORTED_MODULE_6__["select"]('.GraphContainer').selectAll('svg').remove();
 
         _this2.addGraph();
       })["catch"](function (err) {// console.log(err);
@@ -2641,7 +2641,7 @@ module.exports = {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "body {\n  padding: 0;\n  font-size: 16px;\n  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;\n  color: rgb(72, 72, 72);\n  width: 700px;\n}\n\n.Reviews {\n  font-size: 24px;\n}\n\n.ReviewNum {\n  display: inline;\n}\n\n.RightNum {\n  border-left: solid 1px #eaeaea;\n  margin-left: 15px;\n  padding-left: 15px;\n}\n\n.ReviewNum img {\n  width: 15px;\n  margin: 0 5px -2px;\n}\n\n.ReviewSearch {\n  border-radius: 5px;\n  font-size: 14px;\n  letter-spacing: normal;\n  color: #484848;\n  padding: 8px 7px;\n  font-weight: 400;\n  border: solid 1px #e0e0e0;\n  display: block;\n  width: 310px;\n  margin: 22px 0 0 0;\n}\n\n.ReviewTop {\n  margin-bottom: -25px;\n}\n\n.ButtonContainer {\n  position: relative;\n  width: 65px;\n  display: flex;\n  justify-content: flex-end;\n  top: -33px;\n  right: -258px;\n}\n\n.CancelSearchBtn {\n  border: none;\n  padding: 7px;\n  color: lightslategrey;\n  font-weight: 600;\n  margin-right: 6px;\n}\n\n.SearchBtn {\n  position: relative;\n  border-radius: 5px;\n  height: 30px;\n  border-color: transparent;\n}", ""]);
+exports.push([module.i, ".review-body {\n  padding: 0;\n  font-size: 16px;\n  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;\n  color: rgb(72, 72, 72);\n  width: 700px;\n}\n\n.Reviews {\n  font-size: 24px;\n}\n\n.ReviewNum {\n  display: inline;\n}\n\n.RightNum {\n  border-left: solid 1px #eaeaea;\n  margin-left: 15px;\n  padding-left: 15px;\n}\n\n.ReviewNum img {\n  width: 15px;\n  margin: 0 5px -2px;\n}\n\n.ReviewSearch {\n  border-radius: 5px;\n  font-size: 14px;\n  letter-spacing: normal;\n  color: #484848;\n  padding: 8px 7px;\n  font-weight: 400;\n  border: solid 1px #e0e0e0;\n  display: block;\n  width: 310px;\n  margin: 22px 0 0 0;\n}\n\n.ReviewTop {\n  margin-bottom: -25px;\n}\n\n.ButtonContainer {\n  position: relative;\n  width: 65px;\n  display: flex;\n  justify-content: flex-end;\n  top: -33px;\n  right: -258px;\n}\n\n.CancelSearchBtn {\n  border: none;\n  padding: 7px;\n  color: lightslategrey;\n  font-weight: 600;\n  margin-right: 6px;\n}\n\n.SearchBtn {\n  position: relative;\n  border-radius: 5px;\n  height: 30px;\n  border-color: transparent;\n}", ""]);
 // Exports
 module.exports = exports;
 
