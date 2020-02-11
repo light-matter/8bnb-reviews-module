@@ -9,15 +9,16 @@
   },
   "scripts": {
     "migrate": "mysql -u root -p < schema.sql",
-    "start": "node ./server/index.js",
+    "start": "webpack-dev-server --open --config webpack.dev.js & node ./server/index.js",
     "start-dev": "webpack-dev-server --open",
-    "build": "webpack --watch",
+    "build": "webpack --config webpack.prod.js",
     "seed": "node seed.js",
     "test": "jest --watch"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
+    "clean-webpack-plugin": "^3.0.0",
     "d3": "^5.15.0",
     "express": "^4.17.1",
     "morgan": "^1.9.1",
@@ -45,6 +46,7 @@
     "style-loader": "^1.1.3",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1"
+    "webpack-dev-server": "^3.10.1",
+    "webpack-merge": "^4.2.2"
   }
 }
