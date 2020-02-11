@@ -5,7 +5,9 @@ const Pagination = (props) => {
 
   const pageNumbers = [];
   const totalPages = Math.ceil(props.reviews.length / props.reviewsPerPage)
-
+  // pages = 1, ..., 4, 5, ..., 16
+  // pages = 1, 2, 3, 4, 5
+  // pages.length > 5 ? currPage + 2 + ... + last
   if (totalPages < 6) {
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(i);
@@ -16,9 +18,6 @@ const Pagination = (props) => {
     }
     pageNumbers.push('...', totalPages);
   }
-  // pages = 1, ..., 4, 5, ..., 16
-  // pages = 1, 2, 3, 4, 5
-  // pages.length > 5 ? currPage + 2 + ... + last
 
   return (
     <ul className="Pagination">
